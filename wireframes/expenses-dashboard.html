@@ -36,7 +36,7 @@
                             <td>Water</td>
                             <td>$150.00</td>
                             <td>05/01/2020</td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
@@ -44,7 +44,7 @@
                             <td>Electric</td>
                             <td>$200.00</td>
                             <td>05/02/2020</td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
@@ -52,7 +52,7 @@
                             <td>Gas</td>
                             <td>$50.00</td>
                             <td>05/10/2020</td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
@@ -60,7 +60,7 @@
                             <td>Landscaping</td>
                             <td>$125.00</td>
                             <td>05/03/2020</td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
@@ -76,7 +76,7 @@
                             <td>HVAC/Heat Pump</td>
                             <td>$99.99</td>
                             <td>05/05/2020</td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
@@ -84,7 +84,7 @@
                             <td>Groceries</td>
                             <td>$225.00</td>
                             <td>05/01/2020</td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
@@ -92,7 +92,7 @@
                             <td>Groceries</td>
                             <td>$189.00</td>
                             <td>05/09/2020</td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
@@ -116,5 +116,11 @@
             <li><a href="./service-provider-add-form.html">Add Service Provider</a></li>
         </ul>
     </footer>
+
+    <script>
+        function handleRedirect() {
+            window.location.href = './expense-update-form.html'
+        }
+    </script>
 </body>
 </html>

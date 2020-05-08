@@ -37,28 +37,28 @@
                             <td>Water Utility LLC</td>
                             <td>Water</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
                             <td>Electric Gmbh</td>
                             <td>Electric</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
                             <td>Pendelton Gas Co.</td>
                             <td>Gas</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
                             <td>Tree & Yellow Lawn Services</td>
                             <td>Landscaping</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
@@ -72,35 +72,35 @@
                             <td>Grobler and Sons Inc</td>
                             <td>HVAC/Heat Pump</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
                             <td>Gutter World Corp</td>
                             <td>Other</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
                             <td>No Pay insurance</td>
                             <td>Insurance</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
                             <td>Hermann Iota & Co</td>
                             <td>Plumbing</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                         <tr>
                             <td>Ernesto Lopez</td>
                             <td>Home Construction & Repairs</td>
                             <td><input type="button" id="details" value="Details"></td>
-                            <td><input type="button" id="edit" value="Edit"></td>
+                            <td><input type="button" id="edit" value="Edit" onclick="handleRedirect()"></td>
                             <td><input type="button" id="delete" value="Delete"></td>
                         </tr>
                     </tbody>
@@ -119,5 +119,11 @@
             <li><a href="./service-provider-add-form.html">Add Service Provider</a></li>
         </ul>
     </footer>
+
+    <script>
+        function handleRedirect() {
+            window.location.href = './service-provider-update-form.html'
+        }
+    </script>
 </body>
 </html>
