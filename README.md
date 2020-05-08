@@ -19,7 +19,7 @@ HTML, CSS, Javascript, React, React-Router, Fetch API
 
 ## Live Site
 
-[Pending](https://github.com/rodrigohervas/home-manager-client)
+[Landing Wireframe](https://rodrigohervas.github.io/home-manager-client/wireframes/landing.html)
 
 
 ## Log in
