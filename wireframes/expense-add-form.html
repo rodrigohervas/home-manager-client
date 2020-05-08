@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Manager - Expense Add Form</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <nav role="navigation">
+        Home Manager
+        <ul>
+            <li><a href="./landing.html">Landing</a></li>
+            <li><a href="./expenses-dashboard.html">Expenses Dashboard</a></li>
+            <li><a href="./expense-add-form.html">Add Expense</a></li>
+            <li><a href="./service-providers-dashboard.html">Service Providers Dashboard</a></li>
+            <li><a href="./service-provider-add-form.html">Add Service Provider</a></li>
+            <li><a href="signin.html">Sign In</a> / <a href="signup.html">Sign Up</a>
+        </ul>
+    </nav>
+    <main role="main" class="expenses-main">
+        <header>
+            <h1>Add and Expense:</h1>
+        </header>
+        
+        <section>
+            <form>
+
+                <div class="form-group">
+                    <label for="expense-type">
+                        Expense type:
+                    </label>
+                    <select id="expense-type" name="expense-type">
+                        <option value="0">Select expense Type</option>
+                        <option value="1">Water</option>
+                        <option value="2">Gas</option>
+                        <option value="3">Electric</option>
+                        <option value="4">insurance</option>
+                        <option value="5">Groceries</option>
+                        <option value="6">Plumbing</option>
+                        <option value="7">Landscaping</option>
+                        <option value="8">General Repairs</option>
+                        <option value="9">Extraordinary Expense</option>
+                        <option value="10">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="expense-amount">
+                        Amount:
+                    </label>
+                    <input type="text" name="expense-amount" id="expense-amount" placeholder="$150.00" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="expense-name">
+                        Name:
+                    </label>
+                    <input type="text" name="expense-name" id="expense-name" placeholder="Groceries at Joe's" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="expense-description">
+                        Description:
+                    </label>
+                    <textarea id="expense-description" name="expense-description" placeholder="Expense description here" rows="7" cols="50" wrap required ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="expense-date">
+                        Date:
+                    </label>
+                    <input type="date" name="expense-date" id="expense-date" required />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Add">
+                </div>
+            </form>
+        </section>
+
+    </main>
+
+    <footer role="information">
+        <ul>
+            <li><a href="./landing.html">Landing</a></li>
+            <li><a href="./expenses-dashboard.html">Expenses Dashboard</a></li>
+            <li><a href="./expense-add-form.html">Add Expense</a></li>
+            <li><a href="./service-providers-dashboard.html">Service Providers Dashboard</a></li>
+            <li><a href="./service-provider-add-form.html">Add Service Provider</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

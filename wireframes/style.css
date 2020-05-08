@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond|Lato|Lora|Merriweather|Montserrat|Open+Sans|Playfair+Display|Raleway|Roboto|Roboto+Slab|Source+Sans+Pro&display=swap');
+
+:root {
+    --main-bg-color: #fff;
+    --main-font-color: #000;  
+    
+    --second-bg-color: #9db4c0;
+    --second-font-color: #101723;
+
+    --third-bg-color: #e0fbfc;
+    --third-font-color: #161f20;
+
+    --fourth-bg-color: #253237;
+    --fourth-font-color: #e0ebeb;
+
+    --fifth-bg-color: #5c6b73;
+    --fifth-font-color: #e4f0f1;
+
+    --sixth-bg-color: #c2dfe3;
+    --sixth-font-color: #131d22;
+
+    --font-header-merryweather: 'Merriweather', serif;
+    --font-header-raleway: 'Raleway', sans-serif;
+    --font-header-opensans: 'Open Sans', sans-serif;
+    
+    --font-text-garamond: 'EB Garamond', serif;
+    --font-text-montserrat: 'Montserrat', sans-serif;
+    --font-text-lora: 'Lora', serif;
+    --font-text-opensans: 'Open Sans Condensed', sans-serif;
+    --font-text-roboto: 'Roboto Slab', serif;
+    --font-text-sourcesans: 'Source Sans Pro', sans-serif;
+  }
+
+body {
+    padding: 0px;
+    margin: 0px;
+    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+/*grow main to push footer to the end of page*/
+main {
+    flex-grow: 1;;
+}
+
+header, section, nav, footer {
+    margin: 0;
+    padding: 10px;
+}
+
+nav, footer {
+    background-color: var(--fourth-bg-color);
+    color: var(--fourth-font-color);
+}
+
+a, a:hover {
+    font-family: var(--font-text-opensans);
+    color: var(--fourth-font-color);
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+} 
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header-merryweather);
+}
+
+p, label, input, select, textarea, button, table {
+    font-family: var(--font-text-opensans);
+}
+
+
+
+/*  LANDING PAGE  */
+
+.landing-header {
+    background-color: var(--third-bg-color);
+    color: var(--third-font-color);
+}
+
+.landing-howitworks, .landing-howitworks-cards {
+    background-color: var(--second-bg-color);
+    color: var(--second-font-color);
+}
+
+.image-left {
+    background-color: var(--third-bg-color);
+    color: var(--third-font-color);
+}
+
+.image-right {
+    background-color: var(--first-bg-color);
+    color: var(--first-font-color);
+}
+
+
+/* SIGN-IN / SIGN-UP */
+
+.signin-main, .signup-main {
+    background-color: var(--third-bg-color);
+    color: var(--third-font-color);
+}
+
+/* EXPENSES */
+
+.expenses-main  {
+    background-color: var(--third-bg-color);
+    color: var(--third-font-color);
+}
+
+/* SERVICE-PROVIDERS */
+
+.service-providers-main{
+    background-color: var(--third-bg-color);
+    color: var(--third-font-color);
+}
