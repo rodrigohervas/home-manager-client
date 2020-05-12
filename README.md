@@ -26,8 +26,8 @@ HTML, CSS, Javascript, React, React-Router, Fetch API
 
 To access the application it's neccesary to login with a user and password. Use the following:
 
-username: pending
-password: pending
+username: michael@jones.com
+password: michael
 
 
 ## Set up
