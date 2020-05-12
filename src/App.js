@@ -9,6 +9,8 @@ import SignUp from './authentication/SignUp';
 import ExpensesDashBoard from './expenses/expenses-dashboard';
 import ExpenseAddForm from './expenses/expense-add-form';
 import ExpenseUpdateForm from './expenses/expense-update-form';
+import ComponentError from './error-management/ComponentError';
+import NoPageFound from './error-management/NoPageFound';
 
 function App() {
 
@@ -88,42 +90,67 @@ function App() {
         {/* TODO: Nav component */}
       </header>
       <div className="main-container">
-
-        <Route path="/landing">
-          <Landing />
-        </Route>
-        
-        <Route path="/signin">
-          <SignIn />
-        </Route>
-        
-        <Route path="/signup">
-          <SignUp />
-        </Route>
-        
         <Switch>
+
+          <Route exact path="/">
+            <ComponentError>
+              <Landing />
+            </ComponentError>
+          </Route>
+          
+          <Route path="/signin">
+          <ComponentError>
+            <SignIn />
+          </ComponentError>
+          </Route>
+          
+          <Route path="/signup">
+            <ComponentError>
+              <SignUp />
+            </ComponentError>
+          </Route>
+        
           <AuthWrapper>
 
-            <Route path="/expensesdashboard">
-              <ExpensesDashBoard expenses={expenses} addExpense={handleAddExpense} deleteExpense={handleDeleteExpense} />
-            </Route>
+            {/* Switch necessary for to prevent fallback route (NoPageFound) rendering always inside of AuthWrapper */}
+            <Switch>
+
+              <Route path="/expensesdashboard">
+                <ComponentError>
+                  <ExpensesDashBoard expenses={expenses} addExpense={handleAddExpense} deleteExpense={handleDeleteExpense} />
+                </ComponentError>
+              </Route>            
+              
+              <Route path="/addexpense">
+                <ComponentError>
+                  <ExpenseAddForm addExpense={handleAddExpense} />
+                </ComponentError>
+              </Route>
+              
+              <Route path="/updateexpense/:id">
+                <ComponentError>
+                  <ExpenseUpdateForm expense={getExpenseById(history.location.id)} updateExpense={handleExpenseUpdate} />
+                </ComponentError>
+              </Route>            
+
+              {/* TODO: Route for Service Provider DashBoard */}
+
+              {/* TODO: Route for Service Provider Add Form */}
+
+              {/* TODO: Route for Service Provider Update Form */}
+
+              {/* 
+              * last <Route> in the <Switch> as a fallback route, to catch 404 errors
+              * path="*" always matches
+              */}
+              <Route path="*">
+                <NoPageFound route={"/expensesdashboard"} />
+              </Route>
             
-            <Route path="/addexpense">
-              <ExpenseAddForm addExpense={handleAddExpense} />
-            </Route>
+            </Switch>
             
-            <Route path="/updateexpense/:id">
-              <ExpenseUpdateForm expense={getExpenseById(history.location.id)} updateExpense={handleExpenseUpdate} />
-            </Route>
-
-            {/* TODO: Route for Service Provider DashBoard */}
-
-            {/* TODO: Route for Service Provider Add Form */}
-
-            {/* TODO: Route for Service Provider Update Form */}
-
           </AuthWrapper>
-
+          
         </Switch>
       </div>
       <footer>

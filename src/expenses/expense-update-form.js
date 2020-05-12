@@ -56,11 +56,12 @@ function ExpenseAddForm(props) {
      * It is called from cancel event handler or from submit event handler.
      */
     const clearLocalState = () => {
-        localStorage.removeItem('ptoId')
-        localStorage.removeItem('type')
-        localStorage.removeItem('startdate')
-        localStorage.removeItem('finishdate')
-        localStorage.removeItem('comments')
+        localStorage.removeItem('id');
+        localStorage.removeItem('type');
+        localStorage.removeItem('amount');
+        localStorage.removeItem('name');
+        localStorage.removeItem('description');
+        localStorage.removeItem('date');
     }
 
     /**
