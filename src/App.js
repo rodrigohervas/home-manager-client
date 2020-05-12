@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import './styles/App.css';
 import staticExpenses from './static-data/expenses';
+import AuthWrapper from './authentication/AuthWrapper';
+import Landing from './landing';
+import SignIn from './authentication/SignIn';
+import SignUp from './authentication/SignUp';
 import ExpensesDashBoard from './expenses/expenses-dashboard';
 import ExpenseAddForm from './expenses/expense-add-form';
 import ExpenseUpdateForm from './expenses/expense-update-form';
@@ -81,27 +85,49 @@ function App() {
   return (
     <div className="App">
       <header>
-        {/* Nav Component */}
+        {/* TODO: Nav component */}
       </header>
       <div className="main-container">
-        <h1>Home Manager:</h1>
+
+        <Route path="/landing">
+          <Landing />
+        </Route>
+        
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+        
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        
         <Switch>
+          <AuthWrapper>
 
-          <Route path="/expensesdashboard">
-            <ExpensesDashBoard expenses={expenses} addExpense={handleAddExpense} deleteExpense={handleDeleteExpense} />
-          </Route>
-          <Route path="/addexpense">
-            <ExpenseAddForm addExpense={handleAddExpense} />
-          </Route>
-          <Route path="/updateexpense/:id">
-            <ExpenseUpdateForm expense={getExpenseById(history.location.id)} updateExpense={handleExpenseUpdate} />
-          </Route>
+            <Route path="/expensesdashboard">
+              <ExpensesDashBoard expenses={expenses} addExpense={handleAddExpense} deleteExpense={handleDeleteExpense} />
+            </Route>
+            
+            <Route path="/addexpense">
+              <ExpenseAddForm addExpense={handleAddExpense} />
+            </Route>
+            
+            <Route path="/updateexpense/:id">
+              <ExpenseUpdateForm expense={getExpenseById(history.location.id)} updateExpense={handleExpenseUpdate} />
+            </Route>
 
+            {/* TODO: Route for Service Provider DashBoard */}
+
+            {/* TODO: Route for Service Provider Add Form */}
+
+            {/* TODO: Route for Service Provider Update Form */}
+
+          </AuthWrapper>
 
         </Switch>
       </div>
       <footer>
-        {/* Footer Component */}
+        {/* TODO: Footer Component */}
       </footer>
     </div>
   );
