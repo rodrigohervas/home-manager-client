@@ -1,0 +1,93 @@
+.expense-container {
+    border: 1px solid #CCC;
+    border-radius: 5px;
+
+    background-color: #fff;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 10px 0px;
+    padding: 10px 0px;
+}
+
+.expense-basic-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-hide {
+    cursor: pointer;
+}
+
+.expense-more-info {
+    /* display: none => more-info div hidden on component load */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.expense-more-info > .type-container, .date-container {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+.type, .date {
+    margin-right: auto;
+    width: 80px;
+}
+
+.label-title {
+    font-weight: 700;
+    margin-left: auto;
+}
+
+/* center description label title */
+.description-container > .label-title {
+    margin: auto;
+}
+
+.expense-more-info > .description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.expense-more-info > .buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/* NON-MOBILE */
+@media screen and (min-width: 470px) {
+    .expense-container {
+        width: 470px;
+    }
+    
+    .expense-basic-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .amount {
+        margin-left: auto;
+    }
+
+    .show-hide {
+        margin-right: 15px;
+    }
+
+    .expense-more-info > .info {
+        display: flex;
+        flex-direction: row;
+    }    
+}
