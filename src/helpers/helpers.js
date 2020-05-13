@@ -39,3 +39,11 @@ export const formatDate = (date, forInput) => {
     
     return forInput ? `${year}-${strMonth}-${strDay}` : `${strMonth}/${strDay}/${year}`
 }
+
+/**
+ * Function to format an amount with no decimals adding 2 decimals
+ * @param {String} number 
+ */
+export const formatAmount = (amount) => {
+    return parseFloat(amount).toFixed(2);
+};

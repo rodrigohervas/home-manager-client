@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
 import ExpenseTypes from './../static-data/expense-types';
-import { formatDate } from './../helpers/helpers';
+import { formatDate, formatAmount } from './../helpers/helpers';
 
 function ExpenseAddForm(props) {
 
@@ -147,7 +147,7 @@ function ExpenseAddForm(props) {
                 const expense = {
                     id: Math.floor(Math.random() * (5000 - 50)) + 50, //TODO: remove when adding to server
                     type: type, 
-                    amount: amount, 
+                    amount: formatAmount(amount), 
                     name: name, 
                     description: description, 
                     date: formatDate(date, false)
