@@ -11,6 +11,8 @@ import ExpenseAddForm from './expenses/expense-add-form';
 import ExpenseUpdateForm from './expenses/expense-update-form';
 import ComponentError from './error-management/ComponentError';
 import NoPageFound from './error-management/NoPageFound';
+import Nav from './navigation/Nav';
+import Footer from './navigation/Footer';
 
 function App() {
 
@@ -85,11 +87,11 @@ function App() {
   //console.log('Expenses: ', expenses)
 
   return (
-    <div className="App">
+    <div className="app">
       <header>
-        {/* TODO: Nav component */}
+        <Nav />
       </header>
-      <div className="main-container">
+      <main className="main-container">
         <Switch>
 
           <Route exact path="/">
@@ -112,7 +114,7 @@ function App() {
         
           <AuthWrapper>
 
-            {/* Switch necessary for to prevent fallback route (NoPageFound) rendering always inside of AuthWrapper */}
+            {/* Switch necessary to prevent the fallback route (NoPageFound) from rendering always inside of AuthWrapper */}
             <Switch>
 
               <Route path="/expensesdashboard">
@@ -152,9 +154,9 @@ function App() {
           </AuthWrapper>
           
         </Switch>
-      </div>
+      </main>
       <footer>
-        {/* TODO: Footer Component */}
+        <Footer />
       </footer>
     </div>
   );

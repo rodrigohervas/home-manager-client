@@ -101,6 +101,7 @@ function SignUp(props) {
             localStorage.setItem('user_id', user.user_id);
             localStorage.setItem('username', user.username);
             localStorage.setItem('password', user.password);
+            localStorage.setItem('isSignedIn', true);
             
             history.push('/expensesdashboard');
             
@@ -130,11 +131,6 @@ function SignUp(props) {
             manageUser(user);
         }
     }
-
-    /**
-     * render prop to update sign-in state in App.js
-     */ 
-    ////////////////////////////////////////// const { isLogged } = props
 
     return (
         <section className="form-container">

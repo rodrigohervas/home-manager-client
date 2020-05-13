@@ -32,33 +32,39 @@
   }
 
 body {
-    padding: 0px;
-    margin: 0px;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
+  padding: 0;
+  margin: 0;
+}
 
-    background-color: var(--third-bg-color);
-    color: var(--third-font-color);
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* App will use a minimum of the 100% of the screen always */
+  width: 100%;
+  
+  background-color: var(--third-bg-color);
+  color: var(--third-font-color);
 }
 
 /*grow main to push footer to the end of page*/
-main {
+.main-container {
     flex-grow: 1;
 }
 
-header, section, nav, footer {
-    margin: 0;
-    padding: 10px;
+header, footer {
+  background-color: var(--fourth-bg-color);
+  color: var(--fourth-font-color);
+  height: 100px;
+  width: 100%;
 }
 
-nav, footer {
-    background-color: var(--fourth-bg-color);
-    color: var(--fourth-font-color);
+.landing {
+  padding: 10px;
 }
 
 a, a:hover {
