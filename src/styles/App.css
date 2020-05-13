@@ -56,7 +56,14 @@ body {
     flex-grow: 1;
 }
 
-header, footer {
+header {
+  background-color: var(--fourth-bg-color);
+  color: var(--fourth-font-color);
+  height: 200px;
+  width: 100%;
+}
+
+footer {
   background-color: var(--fourth-bg-color);
   color: var(--fourth-font-color);
   height: 100px;
@@ -65,12 +72,6 @@ header, footer {
 
 .landing {
   padding: 10px;
-}
-
-a, a:hover {
-    font-family: var(--font-text-opensans);
-    color: var(--fourth-font-color);
-    text-decoration: none;
 }
 
 ul {
@@ -95,3 +96,24 @@ label, input, select, textarea, button {
 input[type="button"] {
   margin: 0px 15px;
 }
+
+a, a:hover {
+  font-family: var(--font-text-opensans);
+  color: var(--second-font-color);
+  text-decoration: none;
+}
+
+.menu > .navlink, .footer-menu > .navlink  {
+  font-family: var(--font-text-opensans);
+  color: var(--fourth-font-color);
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+  letter-spacing: 1px;
+}
+
+.menu > .navlink:hover, .footer-menu > .navlink:hover {
+  font-family: var(--font-text-opensans);
+  color: var(--second-bg-color);
+  text-decoration: none;
+}
+

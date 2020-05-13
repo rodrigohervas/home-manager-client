@@ -136,6 +136,9 @@ function ExpensesDashBoard(props) {
 
     return (
         <div className="expensesList">
+            <div className="main-header">
+                <h1>Expenses Dashboard:</h1>
+            </div>
 
             <div className="header">
                 <MonthHeader month={month} handleMonth={handleMonth}/>

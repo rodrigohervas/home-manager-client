@@ -243,9 +243,9 @@ function ExpenseAddForm(props) {
 
     return (
         <div className="expenses-main">
-            <header>
-                <h1>Add and Expense:</h1>
-            </header>
+            <div className="main-header">
+                <h1>Update Expense:</h1>
+            </div>
 
             <form onSubmit={ (e) => handleSubmit(e) }>
 

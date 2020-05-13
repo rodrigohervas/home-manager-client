@@ -1,0 +1,36 @@
+header, footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nav, .logo, .menu, .footer-menu {
+    /* border: 1px solid yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease 0s;
+}
+
+.navlink {
+    margin: 5px 25px;
+}
+
+@media screen and (min-width: 750px) {
+    .nav, .logo, .menu, .footer-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.4s ease 0s;
+    }
+
+    .footer-menu {
+        justify-content: center;
+    }
+    
+    .navlink {
+        margin: 5px 25px;
+    }
+}

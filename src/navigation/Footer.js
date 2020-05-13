@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-// import './../style/footer.css'
+import './../styles/nav.css'
 
 /**
  * Footer Component
@@ -10,7 +10,7 @@ function Footer(props) {
     
     return (
         <div className="footer">
-            <div className="info">
+            <div className="footer-menu">
                 <NavLink className="navlink" to="/">
                     {'Landing'}
                 </NavLink>
