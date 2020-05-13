@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
-import ExpenseTypes from './../static-data/expense-types';
+import Types from './../static-data/types';
 import { formatDate, formatAmount } from './../helpers/helpers';
 
-function ExpenseAddForm(props) {
+function ExpenseUpdateForm(props) {
 
     //Variable declarations
     const [id, setId] = useState('');
@@ -52,7 +52,7 @@ function ExpenseAddForm(props) {
     }, [])
 
     /**
-     * function to clear pto data from localStorage before redirecting to another component.
+     * function to clear expense data from localStorage before redirecting to another component.
      * It is called from cancel event handler or from submit event handler.
      */
     const clearLocalState = () => {
@@ -196,7 +196,7 @@ function ExpenseAddForm(props) {
                 //all ok, update the expense
                 //TODO: UPDATE TO SERVER
                 // 1. http url + http options
-                // 2. fetch POST
+                // 2. fetch PUT
                 
 
                 //call for update expenses state in App.js
@@ -204,6 +204,9 @@ function ExpenseAddForm(props) {
 
                 //redirect to expenses-dashboard
                 history.push('/expensesdashboard');
+                                
+                //clear localStorage
+                clearLocalState();
 
                 //clear all errors
                 clearErrors();
@@ -236,10 +239,10 @@ function ExpenseAddForm(props) {
         history.push('/expensesdashboard');
     };
 
-
-
     //generate options for the expense types Select HTML element
-    const options = generateTypeOptions(ExpenseTypes);
+    const options = generateTypeOptions(Types);
+
+
 
     return (
         <div className="expenses-main">
@@ -311,7 +314,7 @@ function ExpenseAddForm(props) {
                                        value={formatDate(date, true)} />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group buttons-container">
                     <input type="submit" value="Cancel" onClick={ () => handleCancel() } />
                     <input type="submit" value="Update" />
                 </div>
@@ -330,4 +333,4 @@ function ExpenseAddForm(props) {
     )
 }
 
-export default ExpenseAddForm;
+export default ExpenseUpdateForm;

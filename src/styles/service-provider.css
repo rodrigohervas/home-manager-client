@@ -1,0 +1,42 @@
+.service-provider-container {
+    display: flex;
+    flex-direction: column;
+    
+    border: 1px solid #CCC;
+    border-radius: 7px;
+    
+    background-color: #fff;
+        
+    max-width: 350px;
+    margin: 25px 0px;
+    padding: 10px 0px
+}
+
+.service-provider-basic-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.service-provider-basic-info > .type {
+    border: 1px solid red;
+    align-self: center !important;
+}
+
+.show-hide {
+    align-self: center !important;
+    cursor: pointer;
+}
+
+.service-provider-address {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-provider-container > .buttons-container {
+    display: flex;
+    flex-direction: row;
+}

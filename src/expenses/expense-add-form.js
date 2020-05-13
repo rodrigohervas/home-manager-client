@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import './../styles/expenses-forms.css';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
-import ExpenseTypes from './../static-data/expense-types';
+import Types from './../static-data/types';
 import { formatDate, formatAmount } from './../helpers/helpers';
 
 function ExpenseAddForm(props) {
@@ -195,12 +196,12 @@ function ExpenseAddForm(props) {
 
 
     //generate options for the expense types Select HTML element
-    const options = generateTypeOptions(ExpenseTypes);
+    const options = generateTypeOptions(Types);
 
     return (
         <div className="expenses-main">
             <div className="main-header">
-                <h1>Update Expense:</h1>
+                <h1>Add Expense:</h1>
             </div>
 
             <form onSubmit={ (e) => handleSubmit(e) }>
@@ -262,7 +263,7 @@ function ExpenseAddForm(props) {
                                        onBlur={ (e) => validateFormField(e) } />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group buttons-container">
                     <input type="submit" value="Cancel" onClick={ () => handleCancel() } />
                     <input type="submit" value="Add" />
                 </div>

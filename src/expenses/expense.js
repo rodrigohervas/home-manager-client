@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './../styles/expense.css';
 import { showHide } from './../helpers/helpers';
-import ExpenseTypes from './../static-data/expense-types';
+import Types from './../static-data/types';
 
 function Expense(props) {
 
@@ -23,7 +23,7 @@ function Expense(props) {
     /**
      * delete event handler to delete an expense:
      *  1. deletes an expense in the data storage, 
-     *  2. calls handleDeleteExpense to update expenses state in App.js
+     *  2. calls deleteExpense to update expenses state in App.js
      * @param {Numeric} id 
      */
     const handleDeleteExpense = (id) => {
@@ -36,9 +36,9 @@ function Expense(props) {
         props.deleteExpense(id);
     }
 
-    //get the expense.type.description for the expense.type.value passed in as param
+    //get the type.description for the type.value passed in as param
     const getTypeDescription = (value) => { 
-        return ExpenseTypes[parseInt(value) - 1].description;
+        return Types[parseInt(value) - 1].description;
     };
 
     const { id, user_id, type, amount, name, description, date } = props.expense;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import './styles/App.css';
-import staticExpenses from './static-data/expenses';
 import AuthWrapper from './authentication/AuthWrapper';
 import Landing from './landing';
 import SignIn from './authentication/SignIn';
@@ -9,28 +8,34 @@ import SignUp from './authentication/SignUp';
 import ExpensesDashBoard from './expenses/expenses-dashboard';
 import ExpenseAddForm from './expenses/expense-add-form';
 import ExpenseUpdateForm from './expenses/expense-update-form';
+import ServiceProvidersDashBoard from './service-providers/service-providers-dashboard';
+import ServiceProviderAddForm from './service-providers/service-provider-add-form';
+import ServiceProviderUpdateForm from './service-providers/service-provider-update-form';
 import ComponentError from './error-management/ComponentError';
 import NoPageFound from './error-management/NoPageFound';
 import Nav from './navigation/Nav';
 import Footer from './navigation/Footer';
+import staticExpenses from './static-data/expenses';
+import staticServiceProviders from './static-data/serviceProviders';
 
 function App() {
 
   //variables declaration
   const [expenses, setExpenses] = useState([]);
+  const [serviceProviders, setServiceProviders] = useState([]);
 
   const history = useHistory();
 
   /**
    * Gets data from data storage
    */
-  const fetchData = () => {
+  const fetchData = (data, cb) => {
     try {
       if( staticExpenses.length === 0) {
-        throw Error({message: 'there are no expenses available', status: '404'})
+        throw Error({message: 'there is no data available', status: '404'})
       }
-      //console.log('Expenses :', staticExpenses);
-      setExpenses(staticExpenses);
+
+      cb(data);
     }
     catch (error) {
       console.log(error);
@@ -42,8 +47,12 @@ function App() {
    * Requests data by calling fetchData()
    */
   useEffect( () => {
-    fetchData();
+    fetchData(staticExpenses, setExpenses);
+    fetchData(staticServiceProviders, setServiceProviders);
+    //console.log('Expenses :', staticExpenses);
+    //console.log('ServiceProviders :', staticServiceProviders);
   }, []);
+
 
   /**
    * Expenses state manager (add)
@@ -60,7 +69,7 @@ function App() {
    * called from render prop from expense-update-form component
    * @param {object} expense
    */
-  const handleExpenseUpdate = (expense) => {
+  const handleUpdateExpense = (expense) => {
     const tempList = expenses.filter( element => element.id !== expense.id);
     const expensesList = [...tempList, expense];
     setExpenses(expensesList);
@@ -68,7 +77,7 @@ function App() {
 
   /**
    * Expenses state manager (delete)
-   * called from render prop from expense component
+   * called from render prop from Expense component
    * @param {number} id
    */
   const handleDeleteExpense = (id) => {
@@ -84,7 +93,49 @@ function App() {
     return expenses.filter(expense => expense.id === id)[0];
   };
 
+  
+  /**
+   * ServiceProvider state manager (add)
+   * called from render prop from service-provider-add-form component
+   * @param {object} serviceProvider
+   */
+  const handleAddServiceProvider = (serviceProvider) => {
+    const tempServiceProviders = [...serviceProviders, serviceProvider];
+    setServiceProviders(tempServiceProviders);
+  }
+
+  /**
+   * Expenses state manager (update)
+   * called from render prop from expense-update-form component
+   * @param {object} expense
+   */
+  const handleUpdateServiceProvider = (serviceProvider) => {
+    const tempList = serviceProviders.filter( element => element.id !== serviceProvider.id);
+    const serviceProvidersList = [...tempList, serviceProvider];
+    setServiceProviders(serviceProvidersList);
+  };
+  
+  /**
+   * ServiceProviders state manager (delete)
+   * called from render prop from ServiceProvider component
+   * @param {number} id
+   */
+  const handleDeleteServiceProvider = (id) => {
+    const updatedList = serviceProviders.filter( serviceProvider => serviceProvider.id !== id );
+    setServiceProviders(updatedList);
+  }
+
+  /**
+   * gets the service-provider corresponding to the param id filtering the serviceProviders state
+   * @param {Numeric} id 
+   */
+  const getServiceProviderById = (id) => {
+    return serviceProviders.filter(serviceProvider => serviceProvider.id === id)[0];
+  };
+
+
   //console.log('Expenses: ', expenses)
+  //console.log('ServiceProviders: ', serviceProviders)
 
   return (
     <div className="app">
@@ -131,15 +182,27 @@ function App() {
               
               <Route path="/updateexpense/:id">
                 <ComponentError>
-                  <ExpenseUpdateForm expense={getExpenseById(history.location.id)} updateExpense={handleExpenseUpdate} />
+                  <ExpenseUpdateForm expense={getExpenseById(history.location.id)} updateExpense={handleUpdateExpense} />
                 </ComponentError>
               </Route>            
 
-              {/* TODO: Route for Service Provider DashBoard */}
+              <Route path="/serviceprovidersdashboard">
+                <ComponentError>
+                  <ServiceProvidersDashBoard serviceProviders={serviceProviders} deleteServiceProvider={handleDeleteServiceProvider} />
+                </ComponentError>
+              </Route>
 
-              {/* TODO: Route for Service Provider Add Form */}
+              <Route path="/addserviceprovider">
+                <ComponentError>
+                  <ServiceProviderAddForm addServiceProvider={handleAddServiceProvider} />
+                </ComponentError>
+              </Route>
 
-              {/* TODO: Route for Service Provider Update Form */}
+              <Route path="/updateserviceprovider/:id">
+                <ComponentError>
+                  <ServiceProviderUpdateForm serviceProvider={getServiceProviderById(history.location.id)} updateServiceProvider={handleUpdateServiceProvider} />
+                </ComponentError>
+              </Route>
 
               {/* 
               * last <Route> in the <Switch> as a fallback route, to catch 404 errors

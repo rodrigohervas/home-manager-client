@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Expense from './expense';
 import MonthHeader from './month-header';
-import ExpenseTypes from './../static-data/expense-types';
+import Types from './../static-data/types';
 
 
 function ExpensesDashBoard(props) {
@@ -64,7 +64,7 @@ function ExpensesDashBoard(props) {
      * @param {String} value 
      */
     const getTypeDescription = (value) => { 
-        return ExpenseTypes[parseInt(value) - 1].description;
+        return Types[parseInt(value) - 1].description;
     };
 
     /**
@@ -127,11 +127,11 @@ function ExpensesDashBoard(props) {
     //Generate list of expense react components to load
     const expensesList = generateExpenseComponents(sortedExpenses);
 
-    //Get Sort options for sort-expenses-select Select 
-    const sortOptions = getSortOptions(filteredExpenses);
+    //Get the list of types for sort-expenses-select Select 
+    const sortTypesList = getSortOptions(expenses);
     
     //Get a list of option HTML elements for the sort-expenses-select Select 
-    const optionList = generateSortOptions(sortOptions);
+    const optionList = generateSortOptions(sortTypesList);
         
 
     return (

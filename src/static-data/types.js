@@ -2,7 +2,7 @@ const types = [
     { value:"1", description:"Water"}, 
     { value:"2", description:"Gas"}, 
     { value:"3", description:"Electric"}, 
-    { value:"4", description:"insurance"}, 
+    { value:"4", description:"Insurance"}, 
     { value:"5", description:"Groceries"}, 
     { value:"6", description:"Plumbing"}, 
     { value:"7", description:"Landscaping"}, 
