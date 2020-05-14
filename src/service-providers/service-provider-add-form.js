@@ -213,7 +213,7 @@ function ServiceProviderAddForm(props) {
                     type: type, 
                     name: name, 
                     description: description, 
-                    telehone: telephone, 
+                    telephone: telephone, 
                     email: email, 
                     address: {
                         street: street, 
