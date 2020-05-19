@@ -43,7 +43,7 @@ Complete the following steps to start a new project (NEW-PROJECT-NAME):
 
 ## Related Repo:
 
-[Pending](https://github.com/rodrigohervas/home-manager-client)
+[Home Manager API](https://github.com/rodrigohervas/home-manager-api)
 
 
 ## Scripts
