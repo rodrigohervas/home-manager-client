@@ -7,8 +7,8 @@ import { useHistory } from 'react-router-dom'
  */
 function AuthWrapper(props) {
 
-    const username = useState(localStorage.getItem('username') || '')
-    const password = useState(localStorage.getItem('password') || '')
+    const [username, setUsername] = useState(localStorage.getItem('username') || '')
+    const [password, setPassword] = useState(localStorage.getItem('password') || '')
     const history = useHistory()
 
     /**
