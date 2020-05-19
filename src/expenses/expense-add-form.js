@@ -174,12 +174,12 @@ function ExpenseAddForm(props) {
                 .then(data => {
                     //update expenses state in App.js
                     props.addExpense(data);
-
-                    //redirect to expenses-dashboard
-                    history.push('/expensesdashboard');
-
+                    
                     //clear all errors
                     clearErrors();
+
+                    //redirect to expenses-dashboard
+                    history.push('/expensesdashboard');                    
                 })
                 .catch(error => {
                     setOperationError(error)

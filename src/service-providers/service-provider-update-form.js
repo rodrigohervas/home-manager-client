@@ -296,14 +296,14 @@ function ServiceProviderUpdateForm(props) {
                     //call to update App.js state for service-providers
                     props.updateServiceProvider(data);
 
-                    //redirect to expenses-dashboard
-                    history.push('/serviceprovidersdashboard');
-
                     //clear localStorage
                     clearLocalState();
 
                     //clear all errors
                     clearErrors();
+
+                    //redirect to expenses-dashboard
+                    history.push('/serviceprovidersdashboard');
                 })
                 .catch(error => {
                     setOperationError(error);

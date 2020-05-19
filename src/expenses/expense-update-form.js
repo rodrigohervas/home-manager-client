@@ -89,7 +89,6 @@ function ExpenseUpdateForm(props) {
         }
 
         if(name === "expense-date") {
-            console.log('date: ', value)
             setDate(value);
         }
     };
@@ -215,15 +214,15 @@ function ExpenseUpdateForm(props) {
                 .then(data => {
                     //call for update expenses state in App.js
                     props.updateExpense(data);
-
-                    //redirect to expenses-dashboard
-                    history.push('/expensesdashboard');
                                     
                     //clear localStorage
                     clearLocalState();
 
                     //clear all errors
                     clearErrors();
+
+                    //redirect to expenses-dashboard
+                    history.push('/expensesdashboard');
                 })
                 .catch(error => {
                     setOperationError(error);

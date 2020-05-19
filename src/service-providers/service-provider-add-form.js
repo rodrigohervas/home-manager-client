@@ -245,11 +245,11 @@ function ServiceProviderAddForm(props) {
                     //call to update App.js state for service-providers
                     props.addServiceProvider(data);
 
-                    //redirect to expenses-dashboard
-                    history.push('serviceprovidersdashboard');
-
                     //clear all errors
                     clearErrors();
+
+                    //redirect to expenses-dashboard
+                    history.push('serviceprovidersdashboard');
                 })
                 .catch(error => {
                     setOperationError(error)
