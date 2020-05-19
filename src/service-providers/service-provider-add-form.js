@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import './../styles/service-providers-forms.css';
+import config from './../config';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
-import Types from './../static-data/types';
+
 
 function ServiceProviderAddForm(props) {
 
@@ -209,8 +210,8 @@ function ServiceProviderAddForm(props) {
         if(isValid()) {
             try{
                 const serviceProvider = {
-                    id: Math.floor(Math.random() * (5000 - 50)) + 50, //TODO: remove when adding to server
-                    type: type, 
+                    user_id: localStorage.getItem('user_id'), 
+                    type_id: type, 
                     name: name, 
                     description: description, 
                     telephone: telephone, 
@@ -223,20 +224,37 @@ function ServiceProviderAddForm(props) {
                     }
                 };
 
-                //all ok, add the service-provider
-                //TODO: ADD TO SERVER
-                // 1. http url + http options
-                // 2. fetch POST
-                
+                const url = `${config.REACT_APP_API_URL_SERVICE_PROVIDERS}`
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json', 
+                        'Authorization': `Bearer ${config.REACT_APP_API_KEY}`
+                    },
+                    body: JSON.stringify(serviceProvider)
+                };
 
-                //call to update App.js state for service-providers
-                props.addServiceProvider(serviceProvider);
+                fetch(url, options)
+                .then(res => {
+                    if(!res.ok) {
+                        throw Error('Oops! something went wrong: couldn\'t create service provider');
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    //call to update App.js state for service-providers
+                    props.addServiceProvider(data);
 
-                //redirect to expenses-dashboard
-                history.push('serviceprovidersdashboard');
+                    //redirect to expenses-dashboard
+                    history.push('serviceprovidersdashboard');
 
-                //clear all errors
-                clearErrors();
+                    //clear all errors
+                    clearErrors();
+                })
+                .catch(error => {
+                    setOperationError(error)
+                    setShowOperationError(true)
+                })
             }
             catch (error) {
                 setOperationError(error);
@@ -251,7 +269,7 @@ function ServiceProviderAddForm(props) {
      */
     const generateTypeOptions = (types) => {
         return types.map(type => { 
-            return <option key={type.value} value={type.value}>{type.description}</option>
+            return <option key={type.id} value={type.id}>{type.name}</option>
         });
     };
 
@@ -263,9 +281,11 @@ function ServiceProviderAddForm(props) {
     };
 
 
+    //get types from props
+    const types = props.types;
 
     //generate options for the expense types Select HTML element
-    const options = generateTypeOptions(Types);
+    const options = generateTypeOptions(types);
 
     return (
         <div className="service-providers-main">

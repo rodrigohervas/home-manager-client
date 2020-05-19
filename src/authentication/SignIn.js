@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './../styles/signin.css';
 import { NavLink, useHistory } from 'react-router-dom';
+import config from './../config';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
 
@@ -93,25 +94,47 @@ function SignIn(props) {
     }
 
     /**
-     * static information username and password validation manager
+     * fetch that validates the user from the API and stores it in localStorage
      * @param {Object} user 
      */
-    const manageUser = (user) => {
-        if(user.username === 'michael@jones.com' && user.password === "michael") {
-            //set user data in localStorage
-            localStorage.setItem('user_id', user.user_id);
-            localStorage.setItem('username', user.username);
-            localStorage.setItem('password', user.password);
-            localStorage.setItem('isSignedIn', true);
+    const manageUser = (user) => {        
+        const url = config.REACT_APP_API_URL_LOGIN
+        const authorization = `Bearer ${config.REACT_APP_API_KEY}`
 
-            clearErrors();
-            
-            history.push('/expensesdashboard');
-        }
-        else {
-            setError({ message: 'Oops, the username or password are not valid. Please try again.'});
-            setShowError(true);
-        }
+        const options = { 
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json', 
+                'Authorization': authorization
+            },
+            body: JSON.stringify(user)
+        };
+
+        fetch(url, options)
+            .then(res => {
+                if (!res.ok) {
+                    throw Error( 'Oops, something went wrong...')
+                }
+                return res.json()
+            })
+            .then(userDB => {
+                if(userDB) {
+                    //set user data in localStorage
+                    localStorage.setItem('user_id', userDB.id);
+                    localStorage.setItem('username', userDB.username);
+                    localStorage.setItem('password', userDB.password);
+                    localStorage.setItem('isSignedIn', true);
+
+                    clearErrors();
+                    
+                    history.push('/expensesdashboard')
+                }
+            })
+            .catch(error => {
+                //setError({ message: 'Oops, there was a problem validating the user. Please try again.'});
+                setError(error)
+                setShowError(true)
+            })
     };
 
     /**

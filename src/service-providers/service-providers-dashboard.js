@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ServiceProvider from './service-provider';
-import Types from './../static-data/types';
 import './../styles/service-providers-dashboard.css';
 
 
@@ -9,7 +8,6 @@ function ServiceProvidersDashBoard(props) {
 
     //variable declaration
     const [sortCriteria, setSortCriteria] = useState('All');
-    //const [month, setMonth] = useState(new Date().getMonth() + 1);
     
     const history = useHistory();
 
@@ -19,8 +17,11 @@ function ServiceProvidersDashBoard(props) {
      */
     const generateServiceProviderComponents = (serviceProvidersList) => {
         return serviceProvidersList.map(serviceProvider => {
-            return <ServiceProvider key={serviceProvider.id} serviceProvider={serviceProvider} deleteServiceProvider={deleteServiceProvider} />
-          })
+            return <ServiceProvider key={serviceProvider.id} 
+                                    serviceProvider={serviceProvider} 
+                                    deleteServiceProvider={deleteServiceProvider} 
+                                    serviceProviderType={types[serviceProvider.type_id - 1]} />
+          });
     };
 
     /**
@@ -30,8 +31,8 @@ function ServiceProvidersDashBoard(props) {
     const getSortOptions = (serviceProviders) => {
         const allOptions = [];
         serviceProviders.map(serviceProvider => {
-            if(!allOptions.includes(serviceProvider.type)) {
-                allOptions.push(serviceProvider.type);
+            if(!allOptions.includes(serviceProvider.type_id)) {
+                allOptions.push(serviceProvider.type_id);
             }
             return null;
         });        
@@ -43,19 +44,22 @@ function ServiceProvidersDashBoard(props) {
      * @param {Array} options 
      */
     const generateSortOptions = (options) => {
-        let id = 0;
-        return options.map(option => { 
-            id++;
-            return <option key={id} value={option}>{getTypeDescription(option)}</option>
-        });
+        if(options) {
+            let id = 0;
+            return options.map(option => { 
+                id++;
+                return <option key={id} value={option}>{getTypeName(option)}</option>
+            });
+        }
+        return <option key="0" value="0">No data available</option>
     };    
 
     /**
-     * Get the type.description for the type.value passed in as param
-     * @param {String} value 
+     * Get the type.name for the type.id passed in as param
+     * @param {String} id 
      */
-    const getTypeDescription = (value) => { 
-        return Types[parseInt(value) - 1].description;
+    const getTypeName = (id) => { 
+        return types[parseInt(id) - 1].name;
     };
 
     /**
@@ -63,11 +67,11 @@ function ServiceProvidersDashBoard(props) {
      * @param {Array} serviceProviders 
      * @param {String} type 
      */
-    const sortByType = (serviceProviders, type) => {
-        if(type === 'All'){
+    const sortByType = (serviceProviders, sortCriteria) => {
+        if(sortCriteria === 'All'){
             return serviceProviders;
         }
-        return serviceProviders.filter(serviceProvider => serviceProvider.type === type);
+        return serviceProviders.filter(serviceProvider => serviceProvider.type_id === parseInt(sortCriteria));
     };
 
     /**
@@ -88,18 +92,19 @@ function ServiceProvidersDashBoard(props) {
 
 
     // Get serviceProviders from props
-    const { serviceProviders, deleteServiceProvider } = props;
+    const { serviceProviders, deleteServiceProvider, types } = props;
 
-    // Get serviceProviders sorted by sortCriteria: by default sortCriteria is 'All'
+    // Sort serviceProviders by sortCriteria: by default sortCriteria is 'All'
     const sortedServiceProviders = sortByType(serviceProviders, sortCriteria);
-    
-    //Generate list of serviceProviders react components to load
+        
+    // Generate list of serviceProviders react components to load
     const serviceProvidersList = generateServiceProviderComponents(sortedServiceProviders);
 
-    //Get the list of types for sort-service-providers-select Select 
+
+    // Types Select: Get the list of types for sort-service-providers-select Select 
     const sortTypesList = getSortOptions(serviceProviders);
-    
-    //Get a list of option HTML elements for the sort-service-providers-select Select 
+        
+    // Types Select: Get a list of option HTML elements for the sort-service-providers-select Select 
     const optionList = generateSortOptions(sortTypesList);
         
 

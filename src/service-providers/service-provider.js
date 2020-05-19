@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './../styles/service-provider.css';
 import { showHide } from './../helpers/helpers';
-import Types from './../static-data/types';
+import config from './../config';
+import ErrorMessage from './../error-management/ErrorMessage';
 
 function ServiceProvider(props) {
 
     //Declaration of variables
+    const [operationError, setOperationError] = useState(null);
+    const [showOperationError, setShowOperationError] = useState(false);
+    
     const history = useHistory();    
 
     /**
@@ -28,27 +32,50 @@ function ServiceProvider(props) {
      */
     const handleDeleteServiceProvider = (id) => {
 
-        //TODO: DELETE IN DATA STORAGE
-        // 1. create http url and options
-        // 2. call fetch
+        try {
+            const url = `${config.REACT_APP_API_URL_SERVICE_PROVIDERS}/${id}`;
+            const options = {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json', 
+                    'Authorization': `Bearer ${config.REACT_APP_API_KEY}`
+                },
+                body: JSON.stringify({ user_id: user_id })
+            }
 
-        //delete service-provider state in App.js
-        props.deleteServiceProvider(id);
+            fetch(url, options)
+                .then(res => {
+                    if(!res.ok) {
+                        throw Error('Oops! something went wrong: couldn\'t delete service provider');
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    //delete service-provider state in App.js
+                    props.deleteServiceProvider(id);
+                })
+                .catch(error => {
+                    setOperationError(error);
+                    setShowOperationError(true);
+                })
+        }
+        catch(error) {
+            setOperationError(error)
+            setShowOperationError(true)
+        }
+
+        
     }
 
-    //get the type.description for the type.value passed in as param
-    const getTypeDescription = (value) => { 
-        return Types[parseInt(value) - 1].description;
-    };
-
-    const { id, user_id, type, name, description, address, telephone, email } = props.serviceProvider;
+    const { id, user_id, name, description, address, telephone, email } = props.serviceProvider;
+    const type = props.serviceProviderType;
 
     return (
         <div className="service-provider-container">
             <div className="service-provider-basic-info">
                 
                 <label className="type"> 
-                    { getTypeDescription(type) }
+                    {type.name}
                 </label>
                 
                 <label className="name">
@@ -83,6 +110,8 @@ function ServiceProvider(props) {
                 <input type="button" id="edit" value="Edit" onClick={() => handleUpdateServiceProvider(id)} />
                 <input type="button" id="delete" value="Delete" onClick={() => handleDeleteServiceProvider(id)} />
             </div>
+
+            { showOperationError && <ErrorMessage message={operationError} /> }
             
         </div>
     )

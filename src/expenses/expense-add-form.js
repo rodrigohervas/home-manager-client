@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import './../styles/expenses-forms.css';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
-import Types from './../static-data/types';
+import config from './../config';
 import { formatDate, formatAmount } from './../helpers/helpers';
 
 function ExpenseAddForm(props) {
@@ -144,30 +144,47 @@ function ExpenseAddForm(props) {
         e.preventDefault();
 
         if(isValid()) {
-            try{
+            try {
                 const expense = {
-                    id: Math.floor(Math.random() * (5000 - 50)) + 50, //TODO: remove when adding to server
-                    type: type, 
+                    user_id: localStorage.getItem('user_id'),
+                    type_id: type, 
                     amount: formatAmount(amount), 
                     name: name, 
                     description: description, 
                     date: formatDate(date, false)
                 };
 
-                //all ok, add the expense
-                //TODO: ADD TO SERVER
-                // 1. http url + http options
-                // 2. fetch POST
-                
+                const url = `${config.REACT_APP_API_URL_EXPENSES}`
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json', 
+                        'Authorization': `Bearer ${config.REACT_APP_API_KEY}`
+                    },
+                    body: JSON.stringify(expense)
+                };
 
-                //call for update expenses state in App.js
-                props.addExpense(expense);
+                fetch(url, options)
+                .then(res => {
+                    if(!res.ok) {
+                        throw Error('Oops! something went wrong: couldn\'t create expense');
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    //update expenses state in App.js
+                    props.addExpense(data);
 
-                //redirect to expenses-dashboard
-                history.push('/expensesdashboard');
+                    //redirect to expenses-dashboard
+                    history.push('/expensesdashboard');
 
-                //clear all errors
-                clearErrors();
+                    //clear all errors
+                    clearErrors();
+                })
+                .catch(error => {
+                    setOperationError(error)
+                    setShowOperationError(true)
+                })                
             }
             catch (error) {
                 setOperationError(error);
@@ -182,7 +199,7 @@ function ExpenseAddForm(props) {
      */
     const generateTypeOptions = (types) => {
         return types.map(type => { 
-            return <option key={type.value} value={type.value}>{type.description}</option>
+            return <option key={type.id} value={type.id}>{type.name}</option>
         });
     };
 
@@ -194,9 +211,11 @@ function ExpenseAddForm(props) {
     };
 
 
+    //get types from props
+    const types = props.types;
 
     //generate options for the expense types Select HTML element
-    const options = generateTypeOptions(Types);
+    const options = generateTypeOptions(types);
 
     return (
         <div className="expenses-main">

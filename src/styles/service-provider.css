@@ -20,7 +20,8 @@
 }
 
 .service-provider-basic-info > .type {
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    min-width: 225px;
     align-self: center !important;
 }
 
@@ -30,7 +31,7 @@
 }
 
 .service-provider-address {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;

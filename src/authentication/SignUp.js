@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './../styles/signin.css';
 import { NavLink, useHistory } from 'react-router-dom';
+import config from './../config';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
-import config from './../config';
+
 
 /**
  * Authentication SignUp component
@@ -69,6 +70,15 @@ function SignUp(props) {
                 setPasswordError(false);
             }
         }
+
+        if(inputName === 'repeatPassword') {
+            if (password !== e.target.value) {
+                setPasswordError(true);
+            }
+            else { 
+                setPasswordError(false);
+            }
+        }
     }
 
     /**
@@ -93,24 +103,46 @@ function SignUp(props) {
     }
 
     /**
-     * static information username and password creation and validation manager
+     * fetch that posts the user to the API and stores it in localStorage
      * @param {object} user 
      */
     const manageUser = (user) => {
-        if(user.username === "michael@jones.com" && user.password === "michael") {
-            localStorage.setItem('user_id', user.user_id);
-            localStorage.setItem('username', user.username);
-            localStorage.setItem('password', user.password);
-            localStorage.setItem('isSignedIn', true);
-            
-            history.push('/expensesdashboard');
-            
-            clearErrors();
-        }
-        else {
-            setError({ message: 'Oops, there was a problem creating the user. Please try again.'});
-            setShowError(true);
-        }
+        const url = config.REACT_APP_API_URL_USERS
+        const authorization = `Bearer ${config.REACT_APP_API_KEY}`
+
+        const options = { 
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json', 
+                'Authorization': authorization
+            },
+            body: JSON.stringify(user)
+        };
+
+        fetch(url, options)
+        .then(res => {
+            if (!res.ok) {
+                throw Error( 'Oops, something went wrong...')
+            }
+            return res.json()
+        })
+        .then(userDB => {
+            if(userDB) {
+                localStorage.setItem('user_id', userDB.id);
+                localStorage.setItem('username', userDB.username);
+                localStorage.setItem('password', userDB.password);
+                localStorage.setItem('isSignedIn', true);
+                
+                clearErrors();
+                
+                history.push('/expensesdashboard');
+            }
+        })
+        .catch(error => {
+            //setError({ message: 'Oops, there was a problem creating the user. Please try again.'});
+            setError(error)
+            setShowError(true)
+        })
     }
 
     /**
@@ -150,6 +182,16 @@ function SignUp(props) {
                         Password:
                     </label>
                     <input type="password" name="password" id="password" placeholder="your password" 
+                           required 
+                           onBlur={e => validateInput(e)}
+                           onChange={e => handleChange(e)} />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="repeatPassword">
+                        Repeat Password:
+                    </label>
+                    <input type="password" name="repeatPassword" id="repeatPassword" placeholder="repeat your password" 
                            required 
                            onBlur={e => validateInput(e)}
                            onChange={e => handleChange(e)} />

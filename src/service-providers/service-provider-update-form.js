@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 // import './../styles/service-providers-forms.css';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
-import Types from './../static-data/types';
+import config from './../config';
 
 function ServiceProviderUpdateForm(props) {
 
@@ -42,7 +42,7 @@ function ServiceProviderUpdateForm(props) {
     useEffect(() =>{
         if(props.serviceProvider) {
             localStorage.setItem('id', props.serviceProvider.id);
-            localStorage.setItem('type', props.serviceProvider.type);
+            localStorage.setItem('type', props.serviceProvider.type_id);
             localStorage.setItem('name', props.serviceProvider.name);
             localStorage.setItem('description', props.serviceProvider.description);
             localStorage.setItem('telephone', props.serviceProvider.telephone);
@@ -74,7 +74,7 @@ function ServiceProviderUpdateForm(props) {
         localStorage.removeItem('type');
         localStorage.removeItem('name');
         localStorage.removeItem('description');
-        localStorage.removeItem('telehone');
+        localStorage.removeItem('telephone');
         localStorage.removeItem('email');
         localStorage.removeItem('street');
         localStorage.removeItem('city');
@@ -261,10 +261,11 @@ function ServiceProviderUpdateForm(props) {
             try{
                 const serviceProvider = {
                     id: parseInt(id), 
-                    type: type, 
+                    user_id: localStorage.getItem('user_id'), 
+                    type_id: type, 
                     name: name, 
                     description: description, 
-                    telehone: telephone, 
+                    telephone: telephone, 
                     email: email, 
                     address: {
                         street: street, 
@@ -274,23 +275,40 @@ function ServiceProviderUpdateForm(props) {
                     }
                 };
 
-                //all ok, add the service-provider
-                //TODO: ADD TO SERVER
-                // 1. http url + http options
-                // 2. fetch PUT
+                const url = `${config.REACT_APP_API_URL_SERVICE_PROVIDERS}/${serviceProvider.id}`
+                const options = {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json', 
+                        'Authorization': `Bearer ${config.REACT_APP_API_KEY}`
+                    },
+                    body: JSON.stringify(serviceProvider)
+                };
                 
+                fetch(url, options)
+                .then(res => {
+                    if(!res.ok) {
+                        throw Error('Oops! something went wrong: couldn\'t update service provider')
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    //call to update App.js state for service-providers
+                    props.updateServiceProvider(data);
 
-                //call to update App.js state for service-providers
-                props.updateServiceProvider(serviceProvider);
+                    //redirect to expenses-dashboard
+                    history.push('/serviceprovidersdashboard');
 
-                //redirect to expenses-dashboard
-                history.push('/serviceprovidersdashboard');
+                    //clear localStorage
+                    clearLocalState();
 
-                //clear localStorage
-                clearLocalState();
-
-                //clear all errors
-                clearErrors();
+                    //clear all errors
+                    clearErrors();
+                })
+                .catch(error => {
+                    setOperationError(error);
+                    setShowOperationError(true);
+                })
             }
             catch (error) {
                 setOperationError(error);
@@ -305,7 +323,7 @@ function ServiceProviderUpdateForm(props) {
      */
     const generateTypeOptions = (types) => {
         return types.map(type => { 
-            return <option key={type.value} value={type.value}>{type.description}</option>
+            return <option key={type.id} value={type.id}>{type.name}</option>
         });
     };
 
@@ -320,10 +338,12 @@ function ServiceProviderUpdateForm(props) {
         history.push('/serviceprovidersdashboard');
     };
 
-    //generate options for the expense types Select HTML element
-    const options = generateTypeOptions(Types);
 
-console.log('serviceProvider: ', props.serviceProvider)
+    //get types from props
+    const types = props.types;
+
+    //generate options for the expense types Select HTML element
+    const options = generateTypeOptions(types);
 
     return (
         <div className="service-providers-main">

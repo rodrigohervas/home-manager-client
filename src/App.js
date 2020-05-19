@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
+import config from './config';
 import './styles/App.css';
 import AuthWrapper from './authentication/AuthWrapper';
 import Landing from './landing';
@@ -15,31 +16,62 @@ import ComponentError from './error-management/ComponentError';
 import NoPageFound from './error-management/NoPageFound';
 import Nav from './navigation/Nav';
 import Footer from './navigation/Footer';
-import staticExpenses from './static-data/expenses';
-import staticServiceProviders from './static-data/serviceProviders';
+import ErrorMessage from './error-management/ErrorMessage';
 
 function App() {
 
   //variables declaration
   const [expenses, setExpenses] = useState([]);
   const [serviceProviders, setServiceProviders] = useState([]);
+  const [types, setTypes] = useState([]);
+
+  const [error, setError] = useState(null);
+  const [showError, setShowError] = useState(false);
 
   const history = useHistory();
 
-  /**
-   * Gets data from data storage
-   */
-  const fetchData = (data, cb) => {
-    try {
-      if( staticExpenses.length === 0) {
-        throw Error({message: 'there is no data available', status: '404'})
-      }
+  //Get user_id from localStorage to fetch only if user is signed in
+  //called from useEffect()
+  const user_id = localStorage.getItem('user_id')
 
-      cb(data);
+  /**
+   * fecth API function to request data to server
+   * @param {string} verb 
+   * @param {string} url 
+   * @param {object} body 
+   * @param {function} callbackFunction 
+   */
+  const fetchAPI = (verb, url, body, callbackFunction) => {
+    
+    const options = { 
+      method: verb,
+      headers: {
+          'content-type': 'application/json', 
+          'Authorization': `Bearer ${config.REACT_APP_API_KEY}`
+      }
+    };
+
+    if(body) {
+      options.body = JSON.stringify(body)
     }
-    catch (error) {
-      console.log(error);
-    }
+
+      fetch(url, options)
+      .then(res => {
+        if (!res.ok) {
+          throw Error( `No data available`)
+        }
+        return res.json()
+      })
+      .then(data => {
+        //console.log('API FETCH response: ', data)
+
+        callbackFunction(data)
+        setError(null)
+      })
+      .catch(error => { 
+        setError(error)
+        setShowError(true)
+      })
   }
 
   /**
@@ -47,11 +79,12 @@ function App() {
    * Requests data by calling fetchData()
    */
   useEffect( () => {
-    fetchData(staticExpenses, setExpenses);
-    fetchData(staticServiceProviders, setServiceProviders);
-    //console.log('Expenses :', staticExpenses);
-    //console.log('ServiceProviders :', staticServiceProviders);
-  }, []);
+    if(user_id){
+      fetchAPI('POST',`${config.REACT_APP_API_URL_EXPENSES}/${user_id}`, null, setExpenses);
+      fetchAPI('POST',`${config.REACT_APP_API_URL_SERVICE_PROVIDERS}/all/${user_id}`, null, setServiceProviders);
+      fetchAPI('POST', `${config.REACT_APP_API_TYPES}/all`, null, setTypes);
+    }
+  }, [user_id]);
 
 
   /**
@@ -133,10 +166,6 @@ function App() {
     return serviceProviders.filter(serviceProvider => serviceProvider.id === id)[0];
   };
 
-
-  //console.log('Expenses: ', expenses)
-  //console.log('ServiceProviders: ', serviceProviders)
-
   return (
     <div className="app">
       <header>
@@ -170,37 +199,39 @@ function App() {
 
               <Route path="/expensesdashboard">
                 <ComponentError>
-                  <ExpensesDashBoard expenses={expenses} addExpense={handleAddExpense} deleteExpense={handleDeleteExpense} />
+                  <ExpensesDashBoard expenses={expenses} addExpense={handleAddExpense} deleteExpense={handleDeleteExpense} types={types} />
                 </ComponentError>
               </Route>            
               
               <Route path="/addexpense">
                 <ComponentError>
-                  <ExpenseAddForm addExpense={handleAddExpense} />
+                  <ExpenseAddForm addExpense={handleAddExpense} types={types} />
                 </ComponentError>
               </Route>
               
               <Route path="/updateexpense/:id">
                 <ComponentError>
-                  <ExpenseUpdateForm expense={getExpenseById(history.location.id)} updateExpense={handleUpdateExpense} />
+                  <ExpenseUpdateForm expense={getExpenseById(history.location.id)} updateExpense={handleUpdateExpense} types={types} />
                 </ComponentError>
               </Route>            
 
               <Route path="/serviceprovidersdashboard">
                 <ComponentError>
-                  <ServiceProvidersDashBoard serviceProviders={serviceProviders} deleteServiceProvider={handleDeleteServiceProvider} />
+                  <ServiceProvidersDashBoard serviceProviders={serviceProviders} deleteServiceProvider={handleDeleteServiceProvider} types={types} />
                 </ComponentError>
               </Route>
 
               <Route path="/addserviceprovider">
                 <ComponentError>
-                  <ServiceProviderAddForm addServiceProvider={handleAddServiceProvider} />
+                  <ServiceProviderAddForm addServiceProvider={handleAddServiceProvider} types={types} />
                 </ComponentError>
               </Route>
 
               <Route path="/updateserviceprovider/:id">
                 <ComponentError>
-                  <ServiceProviderUpdateForm serviceProvider={getServiceProviderById(history.location.id)} updateServiceProvider={handleUpdateServiceProvider} />
+                  <ServiceProviderUpdateForm serviceProvider={getServiceProviderById(history.location.id)} 
+                                             updateServiceProvider={handleUpdateServiceProvider} 
+                                             types={types} />
                 </ComponentError>
               </Route>
 
@@ -211,6 +242,9 @@ function App() {
               <Route path="*">
                 <NoPageFound route={"/expensesdashboard"} />
               </Route>
+
+              {/* Show fetch errors */}
+              { showError && <ErrorMessage message={error} /> }
             
             </Switch>
             

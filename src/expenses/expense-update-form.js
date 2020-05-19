@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import config from './../config';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
-import Types from './../static-data/types';
 import { formatDate, formatAmount } from './../helpers/helpers';
 
 function ExpenseUpdateForm(props) {
@@ -22,7 +22,7 @@ function ExpenseUpdateForm(props) {
     const [descriptionError, setDescriptionError] = useState(false);
     const [dateError, setDateError] = useState(false);
 
-    //add operation error
+    //operation error
     const [operationError, setOperationError] = useState(null);
     const [showOperationError, setShowOperationError] = useState(false);
 
@@ -36,7 +36,7 @@ function ExpenseUpdateForm(props) {
     useEffect(() =>{
         if(props.expense) {
             localStorage.setItem('id', props.expense.id);
-            localStorage.setItem('type', props.expense.type);
+            localStorage.setItem('type', props.expense.type_id);
             localStorage.setItem('amount', props.expense.amount);
             localStorage.setItem('name', props.expense.name);
             localStorage.setItem('description', props.expense.description);
@@ -89,6 +89,7 @@ function ExpenseUpdateForm(props) {
         }
 
         if(name === "expense-date") {
+            console.log('date: ', value)
             setDate(value);
         }
     };
@@ -185,31 +186,49 @@ function ExpenseUpdateForm(props) {
         if(isValid()) {
             try{
                 const expense = {
-                    id: parseInt(id),
-                    type: type, 
+                    id: parseInt(id), 
+                    user_id: localStorage.getItem('user_id'), 
+                    type_id: type, 
                     amount: formatAmount(amount), 
                     name: name, 
                     description: description, 
                     date: formatDate(date, false)
                 };
 
-                //all ok, update the expense
-                //TODO: UPDATE TO SERVER
-                // 1. http url + http options
-                // 2. fetch PUT
-                
+                const url = `${config.REACT_APP_API_URL_EXPENSES}/${expense.id}`
+                const options = {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json', 
+                        'Authorization': `Bearer ${config.REACT_APP_API_KEY}`
+                    },
+                    body: JSON.stringify(expense)
+                };
 
-                //call for update expenses state in App.js
-                props.updateExpense(expense);
+            fetch(url, options)
+                .then(res => {
+                    if(!res.ok) {
+                        throw Error('Oops! something went wrong: couldn\'t update expense')
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    //call for update expenses state in App.js
+                    props.updateExpense(data);
 
-                //redirect to expenses-dashboard
-                history.push('/expensesdashboard');
-                                
-                //clear localStorage
-                clearLocalState();
+                    //redirect to expenses-dashboard
+                    history.push('/expensesdashboard');
+                                    
+                    //clear localStorage
+                    clearLocalState();
 
-                //clear all errors
-                clearErrors();
+                    //clear all errors
+                    clearErrors();
+                })
+                .catch(error => {
+                    setOperationError(error);
+                    setShowOperationError(true);
+                })
             }
             catch (error) {
                 setOperationError(error);
@@ -223,9 +242,7 @@ function ExpenseUpdateForm(props) {
      * @param {Array} options 
      */
     const generateTypeOptions = (types) => {
-        return types.map(type => { 
-            return <option key={type.value} value={type.value}>{type.description}</option>
-        });
+        return types.map(type => (<option key={type.id} value={type.id}>{type.name}</option>) );
     };
 
     /**
@@ -239,10 +256,11 @@ function ExpenseUpdateForm(props) {
         history.push('/expensesdashboard');
     };
 
+   //get types for expenses types HTML Select element
+    const types = props.types;
+    
     //generate options for the expense types Select HTML element
-    const options = generateTypeOptions(Types);
-
-
+    const options = generateTypeOptions(types);
 
     return (
         <div className="expenses-main">

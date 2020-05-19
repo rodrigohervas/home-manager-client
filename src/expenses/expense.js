@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import config from './../config';
 import './../styles/expense.css';
 import { showHide } from './../helpers/helpers';
-import Types from './../static-data/types';
+import ErrorMessage from './../error-management/ErrorMessage';
 
 function Expense(props) {
 
     //Declaration of variables
+    const [operationError, setOperationError] = useState(null);
+    const [showOperationError, setShowOperationError] = useState(false);
+
     const history = useHistory();    
 
     /**
@@ -27,22 +31,45 @@ function Expense(props) {
      * @param {Numeric} id 
      */
     const handleDeleteExpense = (id) => {
+        try {
+            const url = `${config.REACT_APP_API_URL_EXPENSES}/${id}`;
+            const options = {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json', 
+                    'Authorization': `Bearer ${config.REACT_APP_API_KEY}`
+                },
+                body: JSON.stringify({ user_id: user_id })
+            }
 
-        //TODO: DELETE IN DATA STORAGE
-        // 1. create http url and options
-        // 2. call fetch
-
-        //update expenses state in App.js
-        props.deleteExpense(id);
+            fetch(url, options)
+                .then(res => {
+                    if(!res.ok) {
+                        throw Error('Oops! something went wrong: couldn\'t delete expense');
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    //update expenses state in App.js
+                    props.deleteExpense(id);
+                })
+                .catch(error => {
+                    setOperationError(error);
+                    setShowOperationError(true);
+                })
+        }
+        catch(error) {
+            setOperationError(error)
+            setShowOperationError(true)
+        }
     }
 
-    //get the type.description for the type.value passed in as param
-    const getTypeDescription = (value) => { 
-        return Types[parseInt(value) - 1].description;
-    };
+    const { id, user_id, amount, name, description, date } = props.expense;
+    
+    const expenseType = props.expenseType;
 
-    const { id, user_id, type, amount, name, description, date } = props.expense;
-
+    const typeName = expenseType ? expenseType.name : 'no data available';
+    
     return (
         <div className="expense-container">
             <div className="expense-basic-info">
@@ -62,7 +89,7 @@ function Expense(props) {
             <div id={id} className="expense-more-info" display="none" >
                 <div className="type-container">
                     <label className="label-title">Type:</label>
-                    <label className="type"> { getTypeDescription(type) } </label>
+                    <label className="type"> { typeName } </label>
                 </div>
                     
                 <div className="date-container">
@@ -80,6 +107,9 @@ function Expense(props) {
                     <input type="button" id="delete" value="Delete" onClick={() => handleDeleteExpense(id)} />
                 </div>
             </div>
+
+            { showOperationError && <ErrorMessage message={operationError} /> }
+
         </div>
     )
 }
