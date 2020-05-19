@@ -40,7 +40,7 @@ class ComponentError extends Component{
                     <div className="errorBox">
                         <h2 className="errorMessage"> Oops, There was a problem... </h2>
                         <h4 className="errorMessageLink">
-                            <NavLink to="/landing">Go To Landing</NavLink>
+                            <NavLink to="/">Go To Landing</NavLink>
                         </h4>
                     </div>
                 </div>
