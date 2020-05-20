@@ -47,3 +47,32 @@ export const formatDate = (date, forInput) => {
 export const formatAmount = (amount) => {
     return parseFloat(amount).toFixed(2);
 };
+
+
+/**
+ * Function to take a telephone string 1234567890 and convert it to (123) 456-7890
+ * @param {string} telephone 
+ */
+export const beautifyTelephone = (telephone) => {
+    if(telephone) {
+        const prefix = telephone.slice(0,3);
+        const areaCode = telephone.slice(3,6);
+        const number = telephone.slice(-4);
+        return `(${prefix}) ${areaCode}-${number}`;
+    }
+    return '(000) 000-0000';
+};
+
+/**
+ * Function to take a telephone string with any symbol and convert it to a plain number string 1234567890
+ * @param {string} telephone 
+ */
+export const simplifyTelephone = (telephone) => {
+    if(telephone) {
+        const regex = /[0-9]/g;
+        const numbers = telephone.match(regex);
+        const simpleTelephone = numbers.join('');
+        return simpleTelephone;
+    }
+    return '0000000000';
+};
