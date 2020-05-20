@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-// import './../styles/service-providers-forms.css';
+import './../styles/service-providers-forms.css';
+import config from './../config';
+import { simplifyTelephone } from './../helpers/helpers';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
-import config from './../config';
+
 
 function ServiceProviderUpdateForm(props) {
 
@@ -265,7 +267,7 @@ function ServiceProviderUpdateForm(props) {
                     type_id: type, 
                     name: name, 
                     description: description, 
-                    telephone: telephone, 
+                    telephone: simplifyTelephone(telephone), 
                     email: email, 
                     address: {
                         street: street, 

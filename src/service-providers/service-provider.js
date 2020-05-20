@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './../styles/service-provider.css';
-import { showHide } from './../helpers/helpers';
+import { showHide, beautifyTelephone } from './../helpers/helpers';
 import config from './../config';
 import ErrorMessage from './../error-management/ErrorMessage';
 
@@ -63,8 +63,6 @@ function ServiceProvider(props) {
             setOperationError(error)
             setShowOperationError(true)
         }
-
-        
     }
 
     const { id, user_id, name, description, address, telephone, email } = props.serviceProvider;
@@ -72,12 +70,12 @@ function ServiceProvider(props) {
 
     return (
         <div className="service-provider-container">
-            <div className="service-provider-basic-info">
-                
-                <label className="type"> 
-                    {type.name}
+            <div className="service-provider-basic-title">
+            <label className="type"> 
+                    <h2>{type.name}</h2>
                 </label>
-                
+            </div>
+            <div className="service-provider-basic-info">
                 <label className="name">
                     {name}
                 </label>
@@ -87,7 +85,7 @@ function ServiceProvider(props) {
                 </label>
 
                 <label className="telehone">
-                    {telephone}
+                    {beautifyTelephone(telephone)}
                 </label>
 
                 <label className="email">
@@ -102,8 +100,8 @@ function ServiceProvider(props) {
             <div id={id} className="service-provider-address" display="none" >
                                     
                 <label className="address-street">{address.street}</label>
-                <label className="address-city-state-zipcode">{address.city}, {address.state}</label>
-                <label className="address-zipcode">{address.zipcode}</label>
+                <label className="address-city-state-zipcode">{address.city}, {address.state}, {address.zipcode}</label>
+                {/* <label className="address-zipcode"></label> */}
             </div>
             
             <div className="buttons-container">
