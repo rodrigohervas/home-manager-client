@@ -1,13 +1,33 @@
+@import './hamburger.css';
+
 header, footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.nav, .logo, .menu, .footer-menu {
-    /* border: 1px solid yellow; */
+.nav {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+
+    background-color: var(--nav-bg-color);
+    height: 150px;
+    width: 100%;
+
+    box-shadow: 0 0 7px 3px var(--nav-shadow-color);
+}
+
+footer{
+    background-color: var(--nav-bg-color);
+    color: var(--fourth-font-color);
+    height: 140px;
+    width: 100%;
+}
+
+.nav, .logo, .footer-menu {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     transition: all 0.4s ease 0s;
@@ -17,13 +37,38 @@ header, footer {
     margin: 5px 25px;
 }
 
-@media screen and (min-width: 750px) {
-    .nav, .logo, .menu, .footer-menu {
+@media screen and (max-width: 400px) {
+    .nav, .logo, .footer-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s ease 0s;
+    }
+}
+
+@media screen and (min-width: 800px) {
+
+    .nav, footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        height: 100px;
+        transition: all 0.4s ease 0s;        
+    }
+
+    .nav, .logo, .footer-menu {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         transition: all 0.4s ease 0s;
+    }
+
+    .expand-div {
+        display: none;
     }
 
     .footer-menu {

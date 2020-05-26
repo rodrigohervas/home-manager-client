@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import './../styles/service-providers-forms.css';
+import './../styles/forms.css';
 import config from './../config';
 import { simplifyTelephone } from './../helpers/helpers';
 import FormErrorMessage from './../error-management/FormErrorMessage';
@@ -294,7 +294,7 @@ function ServiceProviderAddForm(props) {
                 <h1>Add Service Provider:</h1>
             </div>
 
-            <form onSubmit={ (e) => handleSubmit(e) }>
+            <form onSubmit={ (e) => handleSubmit(e) }>              
 
                 <div className="form-group">
                     <label htmlFor="service-provider-type">
@@ -338,7 +338,7 @@ function ServiceProviderAddForm(props) {
                     </label>
                     <input type="text" name="service-provider-telephone" 
                                        id="service-provider-telephone" 
-                                       placeholder="123-123-1234"
+                                       placeholder="(123) 123-1234"
                                        onChange={ e => handleChange(e) } 
                                        onBlur={ (e) => validateFormField(e) } />
                 </div>
@@ -354,7 +354,7 @@ function ServiceProviderAddForm(props) {
                                        onBlur={ (e) => validateFormField(e) } /> 
                 </div>
 
-                <div className="form-group">
+                <div className="form-group address-container">
                     <label htmlFor="service-provider-address">
                         Address:
                     </label>
@@ -383,8 +383,8 @@ function ServiceProviderAddForm(props) {
 
 
                 <div className="form-group buttons-container">
-                    <input type="submit" value="Cancel" onClick={ () => handleCancel() } />
-                    <input type="submit" value="Add" />
+                    <input type="submit" className="delete-button" value="Cancel" onClick={ () => handleCancel() } />
+                    <input type="submit" className="edit-button" value="Add" />
                 </div>
 
                 { typeError && <FormErrorMessage message={'The Service Provider Type is mandatory and must be valid'} /> }
@@ -395,9 +395,8 @@ function ServiceProviderAddForm(props) {
                 { addressError && <FormErrorMessage message={'The Address is mandatory and must be valid'} /> }
 
                 { showOperationError && <ErrorMessage message={operationError} /> }
-
+                
             </form>
-
         </div>
     )
 }

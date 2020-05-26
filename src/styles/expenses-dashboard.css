@@ -1,0 +1,101 @@
+/* Dashboard main container */
+.expensesList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 50vw;
+    margin-bottom: 40px;
+
+    background-color: var(--body-bg-color);
+}
+
+/* types sort select */
+.sort-expenses-select {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    max-width: 600px;
+    transition: all 0.4s ease 0s;
+}
+
+/* Add expense button */
+.add-expense-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    transition: all 0.4s ease 0s;
+}
+
+/* Totals */
+.totals-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* Totals boxes */
+.all-expenses-total, .sorted-expenses-total {
+    border: 1px solid var(--card-border-color);
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 0px var(--card-shadow-color);
+
+    background-color: var(--totals-bg-color);
+    color: var(--nav-color) !important;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 25px;
+    padding: 10px 0px;
+    width: 175px;
+}
+
+.all-expenses-total:hover, .sorted-expenses-total:hover {
+    background-color: var(--totals-bg-color-hover);
+}
+
+/* Total amounts */
+.total-name{
+    font-size: 1.1em;
+    letter-spacing: 1.5px;
+}
+
+.total-amount {
+    font-size: 1.4em;
+    letter-spacing: 1.5px;
+    text-align: right;
+}
+
+@media screen and (min-width: 620px) {
+    
+    /* types sort select */
+    .sort-expenses-select {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        transition: all 0.4s ease 0s;
+        width: 100%;
+    }
+
+    /* Add expense button */
+    .add-expense-button {
+        margin: 0px 30px;
+        transition: all 0.4s ease 0s;
+    }
+
+    /* Totals */
+    .totals-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+    }
+}

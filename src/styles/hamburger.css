@@ -1,0 +1,85 @@
+
+/* Menu - on small screen hide menu to right of viewer */
+.menu {
+    position: absolute;
+    right: -700px;
+}
+
+/* hamburger container */
+.hamburger {
+    cursor: pointer;
+    margin-right: 100px;
+    transition: all 0.5s ease 0s;
+}
+
+/* all hamburger lines */
+.line-1, .line-2, .line-3 {
+    width: 30px;
+    height: 3px;
+    background-color: var(--nav-color);
+    margin: 5px 0;
+    transition: all 0.5s ease 0s;
+}
+
+/* show menu on click */
+.showMenu {
+    /* set background color */
+    background-color: var(--nav-bg-color);
+
+    /* disdplay as column */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* position under nav bar  */
+    position: absolute;
+    top: 150px;
+    right: 0px !important;
+
+    /* transition smoothly */
+    transition: all 0.5s ease 0s;
+}
+
+.change .line-1 {
+    transform: rotate(-405deg) translate(-8px, 4px);
+}
+
+.change .line-2 {
+    opacity: 0;
+} 
+
+.change .line-3  {
+    transform: rotate(405deg) translate(-7px, -4px);
+}
+
+/* under 400px reposition hamburger to center */
+@media screen and (max-width: 400px) {
+    .hamburger {
+        margin: auto;
+        transition: all 0.5s ease 0s;
+    }
+}
+
+/* over 800px show full menu and hide hamburger */
+@media screen and (min-width: 800px) {
+    
+    /* Menu bar */
+    .menu {
+        /* show menu */
+        position: absolute;
+        right: 0;
+
+        /* position menu */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.4s ease 0s;
+    }
+    
+    /* hide hamburger */
+    .hamburger {
+        display: none;
+    }
+}

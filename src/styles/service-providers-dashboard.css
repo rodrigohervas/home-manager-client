@@ -1,0 +1,65 @@
+/* Dashboard main container */
+.serviceProvidersList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+
+    background-color: var(--body-bg-color);
+}
+
+/* types sort select */
+.sort-service-providers-select {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 30px;
+    transition: all 0.4s ease 0s;
+}
+
+/* Add Provider button */
+.add-service-provider-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 40px;
+}
+
+/* Cards List container */
+.service-providers-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 590px) {
+    /* Cards List container */
+    .service-providers-list-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    /* types sort select */
+    .sort-service-providers-select {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        transition: all 0.4s ease 0s;
+    }
+
+    /* Add Provider button */
+    .add-service-provider-button {
+        margin: 0px 30px;
+        transition: all 0.4s ease 0s;
+    }
+}

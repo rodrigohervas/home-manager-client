@@ -59,7 +59,10 @@ function ServiceProvidersDashBoard(props) {
      * @param {String} id 
      */
     const getTypeName = (id) => { 
-        return types[parseInt(id) - 1].name;
+        if(types.length > 0) {
+            return types[parseInt(id) - 1].name;
+        }
+        return 'no data';
     };
 
     /**
@@ -122,17 +125,20 @@ function ServiceProvidersDashBoard(props) {
                     <option id="select-option0" value="All"> All </option>
                     {optionList}
                 </select>
-                <button id="add-service-provider" className="add-service-provider-button" onClick={() => handleAddServiceProvider() }> Add Provider </button>
+                <input type="button" id="add-service-provider" className="add-service-provider-button add-button" onClick={() => handleAddServiceProvider() } value="Add Provider" />
             </div>
-            
-            {/* All Service Providers */}
-            {serviceProvidersList} 
 
-            {/* No Service Providers available */}
-            { serviceProvidersList.length <= 0 && 
-                                           <div className="service-provider-container">
-                                               <label>No expenses available </label>
-                                           </div> }
+            <div className="service-providers-list-container">
+            
+                {/* All Service Providers */}
+                {serviceProvidersList} 
+
+                {/* No Service Providers available */}
+                { serviceProvidersList.length <= 0 && 
+                                            <div className="service-provider-container">
+                                                <label>No Service Providers available </label>
+                                            </div> }
+            </div>
         </div>
     )
 }

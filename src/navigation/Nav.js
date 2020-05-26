@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './../styles/nav.css';
+import logoImg from './../img/home-manager-logo.png';
 
 
 /**
@@ -25,12 +26,29 @@ function Nav(props) {
             setTitle('Sign In');
         }
     };
+
+    const handleClick = (name) => {
+        const element = document.querySelector('div.hamburger');
+        element.classList.toggle('change');
+
+        /* Menu visibility on click */
+        const menu = document.querySelector('div.menu');
+        menu.classList.toggle('showMenu');
+    };
     
     return (
         <div className="nav">
             <div className="logo">
-                <h2>Home Manager</h2>
+                <img src={logoImg} className="logo" alt="Home Manager"/>
             </div>
+
+            {/* <div className="hamburger" onClick={(e) => handleClick(e.target.className)}> */}
+            <div className="hamburger" onClick={() => handleClick('hamburger')}>
+                <div className="line-1"></div>
+                <div className="line-2"></div>
+                <div className="line-3"></div>
+            </div>
+
             <div className="menu">
                 <NavLink className="navlink" to="/">
                     {'Landing'}

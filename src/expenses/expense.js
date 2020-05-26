@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import config from './../config';
 import './../styles/expense.css';
-import { showHide } from './../helpers/helpers';
+import { showHide, rotateChevron } from './../helpers/helpers';
 import ErrorMessage from './../error-management/ErrorMessage';
 
 function Expense(props) {
@@ -64,6 +64,11 @@ function Expense(props) {
         }
     }
 
+    const manageMoreInfo = (id, e) => {
+        showHide(id);
+        rotateChevron(e);
+    }
+
     const { id, user_id, amount, name, description, date } = props.expense;
     
     const expenseType = props.expenseType;
@@ -81,21 +86,24 @@ function Expense(props) {
                     {amount}
                 </label>
 
-                <label className="show-hide" onClick={() => showHide(id)}>
-                    +
+                <label className="show-hide" onClick={(e) => manageMoreInfo(id, e)}>
+                    <i className="fas fa-chevron-down animation"></i>
                 </label>
             </div>
 
             <div id={id} className="expense-more-info" display="none" >
-                <div className="type-container">
-                    <label className="label-title">Type:</label>
-                    <label className="type"> { typeName } </label>
+                <div className="type-date">
+                    <div className="type-container">
+                        <label className="label-title">Type:</label>
+                        <label > { typeName } </label>
+                    </div>
+                        
+                    <div className="date-container">
+                        <label className="label-title">Date:</label>
+                        <label className="date"> {date} </label>
+                    </div>
                 </div>
-                    
-                <div className="date-container">
-                    <label className="label-title">Date:</label>
-                    <label className="date"> {date} </label>
-                </div>
+                
 
                 <div className="description-container">
                     <label className="label-title"> Description: </label>
@@ -103,8 +111,8 @@ function Expense(props) {
                 </div>
                 
                 <div className="buttons-container">
-                    <input type="button" id="edit" value="Edit" onClick={() => handleUpdateExpense(id)} />
-                    <input type="button" id="delete" value="Delete" onClick={() => handleDeleteExpense(id)} />
+                    <input type="button" id="edit" value="Edit" className="edit-button left" onClick={() => handleUpdateExpense(id)} />
+                    <input type="button" id="delete" value="Delete" className="delete-button" onClick={() => handleDeleteExpense(id)} />
                 </div>
             </div>
 

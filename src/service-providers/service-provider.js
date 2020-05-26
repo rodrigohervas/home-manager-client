@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './../styles/service-provider.css';
-import { showHide, beautifyTelephone } from './../helpers/helpers';
+import { showHide, rotateChevron, beautifyTelephone } from './../helpers/helpers';
 import config from './../config';
 import ErrorMessage from './../error-management/ErrorMessage';
 
@@ -65,48 +65,62 @@ function ServiceProvider(props) {
         }
     }
 
+    const manageMoreInfo = (id, e) => {
+        showHide(id);
+        rotateChevron(e);
+    }
+
     const { id, user_id, name, description, address, telephone, email } = props.serviceProvider;
     const type = props.serviceProviderType;
 
     return (
         <div className="service-provider-container">
             <div className="service-provider-basic-title">
-            <label className="type"> 
+                <label className="type"> 
                     <h2>{type.name}</h2>
                 </label>
             </div>
             <div className="service-provider-basic-info">
-                <label className="name">
-                    {name}
-                </label>
+                <div className="top">
+                    <label className="name">
+                        {name}
+                    </label>
 
-                <label className="description">
-                    {description}
-                </label>
+                    <label className="description">
+                        {description}
+                    </label>
+                </div>
 
-                <label className="telehone">
-                    {beautifyTelephone(telephone)}
-                </label>
+                <div className="bottom">
+                    <label className="telephone">
+                        <i className="fas fa-phone-alt"></i>
+                        &nbsp;&nbsp;
+                        {beautifyTelephone(telephone)}
+                    </label>
 
-                <label className="email">
-                    {email}
-                </label>
+                    <label className="email">
+                        <i className="fas fa-at"></i>
+                        &nbsp;&nbsp;
+                        {email}
+                    </label>
 
-                <label className="show-hide center" onClick={() => showHide(id)}>
-                    +
-                </label>
+                    <label className="show-hide center" onClick={(e) => manageMoreInfo(id,e)}>
+                        <i className="fas fa-chevron-down animation"></i>
+                    </label>
+                </div>
             </div>
 
-            <div id={id} className="service-provider-address" display="none" >
-                                    
-                <label className="address-street">{address.street}</label>
-                <label className="address-city-state-zipcode">{address.city}, {address.state}, {address.zipcode}</label>
-                {/* <label className="address-zipcode"></label> */}
-            </div>
-            
-            <div className="buttons-container">
-                <input type="button" id="edit" value="Edit" onClick={() => handleUpdateServiceProvider(id)} />
-                <input type="button" id="delete" value="Delete" onClick={() => handleDeleteServiceProvider(id)} />
+            <div id={id} className="service-provider-more-info" display="none" >
+                <div className="service-provider-address">
+                    <i className="far fa-address-card fa-2x"></i>
+                    <label className="address-street">{address.street}</label>
+                    <label className="address-city-state-zipcode">{address.city}, {address.state}, {address.zipcode}</label>
+                
+                </div>            
+                <div className="buttons-container">
+                    <input type="button" id="edit" value="Edit" className="edit-button" onClick={() => handleUpdateServiceProvider(id)} />
+                    <input type="button" id="delete" value="Delete" className="delete-button" onClick={() => handleDeleteServiceProvider(id)} />
+                </div>
             </div>
 
             { showOperationError && <ErrorMessage message={operationError} /> }

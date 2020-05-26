@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import './../styles/service-providers-forms.css';
+import './../styles/forms.css';
 import config from './../config';
 import { simplifyTelephone } from './../helpers/helpers';
 import FormErrorMessage from './../error-management/FormErrorMessage';
@@ -418,7 +418,7 @@ function ServiceProviderUpdateForm(props) {
                                        value={email} /> 
                 </div>
 
-                <div className="form-group">
+                <div className="form-group address-container">
                     <label htmlFor="service-provider-address">
                         Address:
                     </label>
@@ -453,8 +453,8 @@ function ServiceProviderUpdateForm(props) {
 
 
                 <div className="form-group buttons-container">
-                    <input type="submit" value="Cancel" onClick={ () => handleCancel() } />
-                    <input type="submit" value="Update" />
+                    <input type="submit" className="delete-button" value="Cancel" onClick={ () => handleCancel() } />
+                    <input type="submit" className="edit-button" value="Update" />
                 </div>
 
                 { typeError && <FormErrorMessage message={'The Service Provider Type is mandatory and must be valid'} /> }

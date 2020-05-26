@@ -1,0 +1,11 @@
+.month-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.fa-chevron-left:hover, .fa-chevron-right:hover {
+    cursor: pointer;    
+}

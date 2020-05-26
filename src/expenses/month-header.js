@@ -1,5 +1,6 @@
 import React from 'react';
 import { getMonthName } from './../helpers/helpers';
+import './../styles/month-header.css';
 
 function MonthHeader(props) {
    
@@ -21,11 +22,11 @@ function MonthHeader(props) {
 
     return(
         <div className="month-title">
-            <h4>
-                <label onClick={() => handleActualMonth(-1)}> {'< '} </label>
+            <h3>
+                <label onClick={() => handleActualMonth(-1)}> <i className="fas fa-chevron-left chev-left"></i> </label>
                 {monthName}, 2020 
-                <label onClick={() => handleActualMonth(1)}> {' >'} </label>
-            </h4>
+                <label onClick={() => handleActualMonth(1)}> <i className="fas fa-chevron-right chev-right"></i> </label>
+            </h3>
         </div>
     )
 }

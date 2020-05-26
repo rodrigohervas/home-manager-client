@@ -1,43 +1,144 @@
+
+/* Card container */
 .service-provider-container {
     display: flex;
     flex-direction: column;
     
-    border: 1px solid #CCC;
-    border-radius: 7px;
-    
-    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid var(--card-border-color);
+    box-shadow: 2px 2px 5px 0px var(--card-shadow-color);
+    background-color: var(--card-bg-color);
         
-    max-width: 350px;
-    margin: 25px 0px;
-    padding: 10px 0px
+    max-width: 240px;
+    margin: 20px 0;
+    padding: 0 20px 40px 20px;
 }
 
+.service-provider-container:hover {
+    transform: translate(2px, 2px);
+    background-color: var(--card-bg-hover-color);
+}
+
+.type {
+    text-align: center;
+    color: var(--type-color);
+
+    letter-spacing: 3px;
+    min-width: 225px;
+    align-self: center !important;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* card upper info part */
 .service-provider-basic-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    background-color: var(--body-bg-color);
+    min-height: 300px;    
 }
 
-.service-provider-basic-info > .type {
-    /* border: 1px solid red; */
-    min-width: 225px;
+.top {
+    border-bottom: 1px solid var(--fourth-bg-color);;
+}
+
+.top, .bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top > .name {
+    margin: 15px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.top > .description {
+    text-align: justify;
+}
+
+.fa-phone-alt {
+    color: var(--icons-color);
+}
+
+.fa-at {
     align-self: center !important;
+    color: var(--icons-color);
 }
 
-.show-hide {
+.bottom > .email {
+    font-size: 85%;
+    word-wrap: break-word;
+    align-items: flex-end !important;
+    margin: auto;
+}
+
+/* + button that shows/hides the address */
+.bottom > .show-hide {
     align-self: center !important;
     cursor: pointer;
 }
 
-.service-provider-address {
+/* more info div */
+.service-provider-more-info {
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    margin: 10px 0px;
 }
 
-.service-provider-container > .buttons-container {
+/* address section in the card */
+.service-provider-address {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: var(--body-bg-color);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 0px;
+    margin: 15px;
+    line-height: 1.6;
+}
+
+.fa-address-card {
+    margin-top: 10px;
+    margin-left: 15px;
+    align-self: flex-start;
+    color: var(--icons-color);
+}
+
+.address-street {
+    padding-bottom: 1px;
+}
+
+.address-city-state-zipcode {
+    padding-top: 1px;
+}
+
+/* edit and delete card buttons */
+.service-provider-more-info > .buttons-container {
     display: flex;
     flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: -15px;
+}
+
+@media screen and (min-width:350px) {
+    /* Card container */
+    .service-provider-container {
+        width: 275px;
+        margin: 20px 15px;
+        padding: 0 20px 40px 20px;
+    }
 }

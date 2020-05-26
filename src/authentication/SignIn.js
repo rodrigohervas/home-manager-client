@@ -180,11 +180,11 @@ function SignIn(props) {
                 </div>
 
                 <div className="form-group">
-                    <input className="submit" type="submit" value="Sign In" />
+                    <input className="signin-submit" type="submit" value="Sign In" />
                 </div>
 
                 <div className="form-group">
-                    <NavLink to="/signup" >Sign Up</NavLink>
+                    <NavLink className="link" to="/signup" >Sign Up</NavLink>
                 </div>
 
                 { UsernameError && <FormErrorMessage message={'invalid username'}/> }

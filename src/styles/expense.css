@@ -1,14 +1,21 @@
 .expense-container {
-    border: 1px solid #CCC;
+    border: 1px solid var(--card-border-color);
     border-radius: 5px;
+    box-shadow: 2px 2px 5px 0px var(--card-shadow-color);
 
-    background-color: #fff;
+    background-color: var(--card-bg-color);
 
     display: flex;
     flex-direction: column;
 
-    margin: 10px 0px;
+    margin: 15px 0px;
     padding: 10px 0px;
+    width: 250px;
+}
+
+.expense-container:hover {
+    transform: translate(2px, 2px);
+    background-color: var(--card-bg-hover-color);
 }
 
 .expense-basic-info{
@@ -16,10 +23,44 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-weight: 600;
+    transition: all 0.5s ease 0s;
+}
+
+.expense-basic-info > .name {
+    font-size: 1.1em;
+}
+
+.expense-basic-info > .amount {
+    font-size: 1.3em;
 }
 
 .show-hide {
     cursor: pointer;
+    font-size: 1.5em;
+    transition: all 0.5s ease 0s;
+}
+
+.show-hide:hover {
+    transform: translate(3px);
+}
+
+.animation {
+    animation-name: '';
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes rotate-down {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(180deg); }
+}
+
+@keyframes rotate-up {
+    from { transform:rotate(180deg); }
+    to { transform:rotate(0deg); }
 }
 
 .expense-more-info {
@@ -28,34 +69,49 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    border-radius: 7px;
+    background-color: var(--body-bg-color);
+    margin: 10px 20px;
+
+    transition: all 0.5s ease 0s;
 }
 
-.expense-more-info > .type-container, .date-container {
+.type-date {
+    text-align: start;
+}
+
+.type-date > .type-container, .type-date > .date-container {
     display: flex;
     flex-direction: row;
-    margin: auto;
+    justify-content: flex-start;
+
+    max-width: 200px;
+    margin: 5px;
 }
 
-.type, .date {
-    margin-right: auto;
-    width: 80px;
-}
-
+/* title */
 .label-title {
     font-weight: 700;
-    margin-left: auto;
+    /* margin-left: auto; */
+
 }
 
-/* center description label title */
-.description-container > .label-title {
-    margin: auto;
-}
-
+/* description */
 .expense-more-info > .description-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
+}
+
+.description-container > .label-title {
+    margin: auto;
+}
+
+.description-container > .description {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .expense-more-info > .buttons-container {
@@ -63,12 +119,18 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
+}
+
+.buttons-container > .left {
+    margin-right: 5px;
 }
 
 /* NON-MOBILE */
-@media screen and (min-width: 470px) {
+@media screen and (min-width: 500px) {
     .expense-container {
         width: 470px;
+        max-width: 470px;
     }
     
     .expense-basic-info {
@@ -80,14 +142,18 @@
 
     .amount {
         margin-left: auto;
+        color: var(--nav-bg-color);
+        font-weight: 600;
+        font-size: 24px;
     }
 
     .show-hide {
         margin-right: 15px;
     }
 
-    .expense-more-info > .info {
+    .expense-more-info > .type-date {
         display: flex;
         flex-direction: row;
+        transition: all 0.4s ease 0s;
     }    
 }

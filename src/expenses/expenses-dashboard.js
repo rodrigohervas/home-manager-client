@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Expense from './expense';
 import MonthHeader from './month-header';
+import './../styles/expenses-dashboard.css';
 
 
 function ExpensesDashBoard(props) {
@@ -116,9 +117,22 @@ function ExpensesDashBoard(props) {
         history.push('/addexpense');
     };
 
+    /**
+     * Function that returns the total amount for an array of expenses
+     * @param {Array} expenses 
+     */
+    const getTotal = (expenses) => {
+        let total = 0;
+        expenses.map(expense => total += parseFloat(expense.amount));
+        return total.toLocaleString();
+    };
+
 
     // Get expenses from props
     const { expenses, deleteExpense, types } = props;
+
+    //get all expenses total
+    const totalAmount = getTotal(expenses);
 
     // Gets expenses filtered by month:
     //  - the first time loads expenses for the present month
@@ -127,6 +141,9 @@ function ExpensesDashBoard(props) {
     
     // Get expenses sorted by sortCriteria: by default sortCriteria is 'All'
     const sortedExpenses = sortByType(filteredExpenses, sortCriteria);
+
+    //Get sorted Expenses Total amount
+    const totalSortedAmount = getTotal(sortedExpenses);
     
     //Generate list of expense react components to load
     const expensesList = generateExpenseComponents(sortedExpenses);
@@ -150,13 +167,27 @@ function ExpensesDashBoard(props) {
 
             <div className="sort-expenses-select">
                 <label htmlFor="expense-type">
-                    Sort by Expense Type:
+                    Sort by Type:
                 </label>
                 <select id="expense-type" name="expense-type" onChange={(e) => handleSort(e)}>
                     <option id="select-option0" value="All"> All </option>
                     {optionList}
                 </select>
-                <button id="add-expense" className="add-expense-button" onClick={() => handleAddExpense() }> Add Expense </button>
+                <input type="button" id="add-expense" className="add-expense-button add-button" onClick={() => handleAddExpense() } value="Add Expense" />
+            </div>
+
+            {/* All Expenses Total */}
+            <div className="totals-container">
+                <div className="all-expenses-total">
+                    <label className="total-name">Total</label>
+                    <label className="total-amount">{totalAmount}</label>
+                </div>
+
+                {/* Sorted Expenses Total */}
+                <div className="sorted-expenses-total">
+                    <label className="total-name">Sorted Total</label>
+                    <label className="total-amount">{totalSortedAmount}</label>
+                </div>
             </div>
             
             {/* All monthly expenses */}

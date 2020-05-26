@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import './../styles/expenses-forms.css';
+import './../styles/forms.css';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
 import config from './../config';
@@ -283,8 +283,8 @@ function ExpenseAddForm(props) {
                 </div>
 
                 <div className="form-group buttons-container">
-                    <input type="submit" value="Cancel" onClick={ () => handleCancel() } />
-                    <input type="submit" value="Add" />
+                    <input type="submit" className="delete-button" value="Cancel" onClick={ () => handleCancel() } />
+                    <input type="submit" className="edit-button" value="Add" />
                 </div>
 
                 { typeError && <FormErrorMessage message={'The Expense Type is mandatory and must be valid'} /> }

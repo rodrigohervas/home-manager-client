@@ -8,6 +8,22 @@ export const showHide = (id) => {
     div.style.display = (div.style.display === 'flex') ? 'none' : 'flex';
 }
 
+/**
+ * Modifies the animation.animation-name
+ * @param {Event} e 
+ */
+export const rotateChevron = (e) => {
+    if ( e.target.style.animationName === '') {
+        e.target.style.animationName = 'rotate-down';
+    }
+    else if ( e.target.style.animationName === 'rotate-down') {
+        e.target.style.animationName = 'rotate-up';
+    }
+    else if ( e.target.style.animationName === 'rotate-up') {
+        e.target.style.animationName = 'rotate-down';
+    }
+}
+
 //enum listing all months of the year for Dashboard component
 export const Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 

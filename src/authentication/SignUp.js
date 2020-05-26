@@ -198,11 +198,11 @@ function SignUp(props) {
                 </div>
 
                 <div className="form-group">
-                    <input className="submit" type="submit" value="Sign Up" />
+                    <input className="signin-submit" type="submit" value="Sign Up" />
                 </div>
 
                 <div className="form-group">
-                    <NavLink to="/signin" >Sign In</NavLink>
+                    <NavLink className="link" to="/signin" >Sign In</NavLink>
                 </div>
 
                 { UsernameError && <FormErrorMessage message={'invalid username'}/> }
