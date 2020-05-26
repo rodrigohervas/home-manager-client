@@ -30,6 +30,36 @@ username: michael@jones.com
 password: michael
 
 
+
+## Screenshots:
+
+### Expenses Dashboard:
+
+In the Expenses Dashboard page the user can find all the information about the expenses saved in the app, as well as being able to update and delete any expense in the app:
+
+![Home Manager Expenses Dashboard Page screenshot](./public/images/expenses-dashboard-big.png)
+
+### Add Expenses:
+
+In the Add Expense page the user will be able to add the expenses:
+
+![Home Manager Page Add Expense Page screenshot](./public/images/expenses-add-form-big.png)
+
+
+### Service Providers Dashboard:
+
+In the Service Providers Dashboard the user can find all the information about the service providers saved in the app, as well as being able to update and delete any service provider in the app:
+
+![Home Manager Service Providers Dashboard Page screenshot](./public/images/service-providers-dashboard-big.png)
+
+
+### Add Service Provider:
+
+In the Add Service Provider page users will be able to add the service providers:
+
+![Home Manager Page Add Service Provider Page screenshot](./public/images/service-providers-add-form-big.png)
+
+
 ## Set up
 
 Complete the following steps to start a new project (NEW-PROJECT-NAME):
