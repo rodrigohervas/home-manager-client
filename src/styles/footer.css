@@ -1,0 +1,37 @@
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: var(--nav-bg-color);
+    color: var(--fourth-font-color);
+    height: 140px;
+    width: 100%;
+}
+
+.footer-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease 0s;
+}
+
+.navlink {
+    margin: 5px 25px;
+}
+
+@media screen and (min-width: 500px) {
+    .footer-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s ease 0s;
+    }
+
+    footer{
+        height: 100px;
+    }
+}

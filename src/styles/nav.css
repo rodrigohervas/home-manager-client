@@ -1,6 +1,6 @@
 @import './hamburger.css';
 
-header, footer {
+header {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,14 +18,7 @@ header, footer {
     box-shadow: 0 0 7px 3px var(--nav-shadow-color);
 }
 
-footer{
-    background-color: var(--nav-bg-color);
-    color: var(--fourth-font-color);
-    height: 140px;
-    width: 100%;
-}
-
-.nav, .logo, .footer-menu {
+.nav, .logo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -38,7 +31,7 @@ footer{
 }
 
 @media screen and (max-width: 400px) {
-    .nav, .logo, .footer-menu {
+    .nav, .logo {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -49,7 +42,7 @@ footer{
 
 @media screen and (min-width: 800px) {
 
-    .nav, footer {
+    .nav {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -59,7 +52,7 @@ footer{
         transition: all 0.4s ease 0s;        
     }
 
-    .nav, .logo, .footer-menu {
+    .nav, .logo {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -71,10 +64,6 @@ footer{
         display: none;
     }
 
-    .footer-menu {
-        justify-content: center;
-    }
-    
     .navlink {
         margin: 5px 25px;
     }
