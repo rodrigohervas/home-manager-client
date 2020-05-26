@@ -232,7 +232,7 @@ function ExpenseAddForm(props) {
                     <select id="expense-type" name="expense-type"
                                               onChange={ e => handleChange(e) } 
                                               onBlur={ (e) => validateFormField(e) } >
-                        <option value="">Select expense Type</option>
+                        <option value="">Select Type</option>
                         {options}
                     </select>
                 </div>
