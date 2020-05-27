@@ -21,7 +21,7 @@ function Landing() {
                 <section className="landing-header">
                     <h1>Manage your home expenses</h1>
                     <h2>Home Manager helps you manage your home expenses and service provider contacts in a cloud-based centralized place for ease of mind</h2>
-                    <input type="button" className="call-to-action-button" onClick={() => history.push('/signin')} value="Sign in!" />
+                    <input type="button" className="call-to-action-button" onClick={() => history.push('/signup')} value="Sign up!" />
                 </section>
                 
                 <section className="landing-howitworks">
