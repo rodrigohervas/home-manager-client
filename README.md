@@ -5,7 +5,7 @@ React client
 
 ## Description: 
 
-Homer Manager is a web based cloud-stored expense manager and service provider contacts manager that lets you track periodic expenses for your home for ease of mind.
+Home Manager is a web based cloud-stored expense manager and service provider contacts manager that lets you track periodic expenses for your home for ease of mind.
 
 Home manager lets you store and track periodic home expenses for utilities, food, maintenance, and extraordinary expenses.
 
