@@ -61,14 +61,14 @@
     }
 }
 
-/* over 800px show full menu and hide hamburger */
-@media screen and (min-width: 800px) {
+/* over 880px show full menu and hide hamburger */
+@media screen and (min-width: 880px) {
     
     /* Menu bar */
     .menu {
         /* show menu */
-        position: absolute;
-        right: 0;
+        position: static;
+        right: 75px;
 
         /* position menu */
         display: flex;
@@ -81,5 +81,6 @@
     /* hide hamburger */
     .hamburger {
         display: none;
+        transition: all 0.7s ease 0s;
     }
 }

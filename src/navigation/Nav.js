@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { closeMenu } from './../helpers/helpers';
 import './../styles/nav.css';
 import logoImg from './../img/home-manager-logo.png';
 
@@ -27,7 +28,7 @@ function Nav(props) {
         }
     };
 
-    const handleClick = (name) => {
+    const handleClick = () => {
         const element = document.querySelector('div.hamburger');
         element.classList.toggle('change');
 
@@ -43,20 +44,20 @@ function Nav(props) {
             </div>
 
             {/* <div className="hamburger" onClick={(e) => handleClick(e.target.className)}> */}
-            <div className="hamburger" onClick={() => handleClick('hamburger')}>
+            <div className="hamburger" onClick={() => handleClick()}>
                 <div className="line-1"></div>
                 <div className="line-2"></div>
                 <div className="line-3"></div>
             </div>
 
             <div className="menu">
-                <NavLink className="navlink" to="/">
+                <NavLink className="navlink" to="/" onClick={() => closeMenu()}>
                     {'Landing'}
                 </NavLink>
-                <NavLink className="navlink" to="/expensesdashboard">
+                <NavLink className="navlink" to="/expensesdashboard" onClick={() => closeMenu()}>
                     {'Expenses'}
                 </NavLink>
-                <NavLink className="navlink" to="/serviceprovidersdashboard">
+                <NavLink className="navlink" to="/serviceprovidersdashboard" onClick={() => closeMenu()}>
                     {'Service Providers'}
                 </NavLink>
                 <NavLink name='signin' className="navlink" to="/signin" onClick={() => handleTitle()}>

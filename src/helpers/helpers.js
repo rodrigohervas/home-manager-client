@@ -8,6 +8,28 @@ export const showHide = (id) => {
     div.style.display = (div.style.display === 'flex') ? 'none' : 'flex';
 }
 
+
+/**
+ * Function that:
+ * 1. manages showing the nav as dropdown
+ * 2. manages rotating back the hamburger
+ */
+export const closeMenu = () => {
+
+    // if nav has class showMenu, width is small, 
+    // and nav should be shown as dropdown. 
+    // Else, don't do anything
+    const nav = document.querySelector('.menu');
+    if(nav.classList[1] === 'showMenu') {
+        /* hide menu on click */
+        nav.classList.toggle('showMenu');
+
+        /* rotate back hamburger */
+        const element = document.querySelector('.hamburger');
+        element.classList.toggle('change');
+    }
+};
+
 /**
  * Modifies the animation.animation-name
  * @param {Event} e 
