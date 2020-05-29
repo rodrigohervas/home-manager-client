@@ -4,6 +4,9 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    /* prevent divs to overflow header on hover effect */
+    z-index: 1;
 }
 
 .nav {
