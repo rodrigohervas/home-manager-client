@@ -6,7 +6,7 @@
 export const showHide = (id) => {
     const div = document.getElementById(id);
     div.style.display = (div.style.display === 'flex') ? 'none' : 'flex';
-}
+};
 
 
 /**
