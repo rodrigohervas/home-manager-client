@@ -28,7 +28,7 @@ function Nav(props) {
         }
     };
 
-    const handleClick = () => {
+    const handleHamburger = () => {
         const element = document.querySelector('div.hamburger');
         element.classList.toggle('change');
 
@@ -43,7 +43,7 @@ function Nav(props) {
                 <img src={logoImg} className="logo" alt="Home Manager"/>
             </div>
 
-            <div className="hamburger" onClick={() => handleClick()}>
+            <div className="hamburger" onClick={() => handleHamburger()}>
                 <div className="line-1"></div>
                 <div className="line-2"></div>
                 <div className="line-3"></div>
