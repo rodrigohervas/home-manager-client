@@ -43,7 +43,6 @@ function Nav(props) {
                 <img src={logoImg} className="logo" alt="Home Manager"/>
             </div>
 
-            {/* <div className="hamburger" onClick={(e) => handleClick(e.target.className)}> */}
             <div className="hamburger" onClick={() => handleClick()}>
                 <div className="line-1"></div>
                 <div className="line-2"></div>
