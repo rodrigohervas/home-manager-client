@@ -1,5 +1,5 @@
 import React from 'react';
-// import './../style/errorMessage.css';
+import './../styles/errorMessage.css';
 
 /**
  * ErrorMessage component

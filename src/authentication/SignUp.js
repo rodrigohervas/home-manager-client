@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './../styles/signin.css';
 import { NavLink, useHistory } from 'react-router-dom';
 import config from './../config';
+import { showHide } from './../helpers/helpers';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
 
@@ -119,6 +120,9 @@ function SignUp(props) {
             body: JSON.stringify(user)
         };
 
+        //Add loader while fetching
+        showHide('loader');
+
         fetch(url, options)
         .then(res => {
             if (!res.ok) {
@@ -134,6 +138,9 @@ function SignUp(props) {
                 localStorage.setItem('isSignedIn', true);
                 
                 clearErrors();
+
+                //Hide loader
+                showHide('loader');
                 
                 history.push('/expensesdashboard');
             }
@@ -142,6 +149,9 @@ function SignUp(props) {
             //setError({ message: 'Oops, there was a problem creating the user. Please try again.'});
             setError(error)
             setShowError(true)
+
+            //Hide loader
+            showHide('loader');
         })
     }
 
@@ -205,15 +215,17 @@ function SignUp(props) {
                     <NavLink className="link" to="/signin" >Sign In</NavLink>
                 </div>
 
-                { UsernameError && <FormErrorMessage message={'invalid username'}/> }
-                { PasswordError && <FormErrorMessage message={'invalid password'}/> }
-                { showError && <ErrorMessage message={error} /> }
+                <div id="loader" className="loader"></div>
 
                 <div>
                     <br /><br />
                     <p><b>Test user:</b> michael@jones.com</p>
                     <p><b>Test password:</b> michael</p>
                 </div>
+
+                { UsernameError && <FormErrorMessage message={'invalid username'}/> }
+                { PasswordError && <FormErrorMessage message={'invalid password'}/> }
+                { showError && <ErrorMessage message={error} /> }
 
             </form>
         </section>

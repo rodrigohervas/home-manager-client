@@ -1,0 +1,33 @@
+.errorCont {
+    margin: auto;
+}
+
+.errorBox {
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    margin: 100px auto;
+    padding: 50px;
+
+    max-width: 375px;
+}
+
+.errorMessage {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    color: red;
+}
+
+.errorMessageLink {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    text-decoration: none;
+}

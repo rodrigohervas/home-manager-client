@@ -1,0 +1,17 @@
+.error {
+    border: 2px solid var(--error-border-color);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    color: var(--error-font-color);
+    width: 200px;
+    padding: 6px 15px;
+    margin: 8px auto;
+    box-sizing: border-box;
+
+    transition: all 0.4s ease 0s;
+}

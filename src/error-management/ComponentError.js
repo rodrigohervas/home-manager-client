@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-// import './../style/componentError.css'
+import './../styles/componentError.css'
 
 /**
  * Error Boundary to manage JS errors in application

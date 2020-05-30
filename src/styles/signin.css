@@ -35,3 +35,20 @@
 .link {
     font-weight: 400 !important;
 }
+
+.loader {
+    display: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border-top: 5px dotted var(--button-add-color-hover);
+    border-right: 5px dotted var(--button-add-color-hover);
+    border-bottom: 5px dotted var(--button-add-color-hover);
+    border-left: 5px dotted var(--button-add-color-hover);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

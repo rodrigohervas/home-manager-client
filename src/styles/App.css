@@ -44,6 +44,11 @@
     --button-cancel-color-hover: #ff8800;
     --button-color-dark: #000;
     --button-color-light: #fff;
+
+    /* Errors */
+    --error-bgcolor: rgb(255, 203, 155);
+    --error-font-color: rgb(211, 11, 11);
+    --error-border-color: lightsalmon;
   }
 
 body {

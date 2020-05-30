@@ -4,6 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import config from './../config';
 import FormErrorMessage from './../error-management/FormErrorMessage';
 import ErrorMessage from './../error-management/ErrorMessage';
+import { showHide } from '../helpers/helpers';
 
 /**
  * Authentication Sign-in component
@@ -110,6 +111,9 @@ function SignIn(props) {
             body: JSON.stringify(user)
         };
 
+        //Add loader while fetching
+        showHide('loader');
+
         fetch(url, options)
             .then(res => {
                 if (!res.ok) {
@@ -127,6 +131,9 @@ function SignIn(props) {
 
                     clearErrors();
                     
+                    //hide loader
+                    showHide('loader');
+
                     history.push('/expensesdashboard')
                 }
             })
@@ -134,6 +141,9 @@ function SignIn(props) {
                 //setError({ message: 'Oops, there was a problem validating the user. Please try again.'});
                 setError(error)
                 setShowError(true)
+
+                //hide loader
+                showHide('loader');
             })
     };
 
@@ -187,15 +197,17 @@ function SignIn(props) {
                     <NavLink className="link" to="/signup" >Sign Up</NavLink>
                 </div>
 
-                { UsernameError && <FormErrorMessage message={'invalid username'}/> }
-                { PasswordError && <FormErrorMessage message={'invalid password'}/> }
-                { showError && <ErrorMessage message={error}/> }
-                
+                <div id="loader" className="loader"></div>
+
                 <div>
                     <br /><br />
                     <p><b>Test user:</b> michael@jones.com</p>
                     <p><b>Test password:</b> michael</p>
                 </div>
+
+                { UsernameError && <FormErrorMessage message={'invalid username'}/> }
+                { PasswordError && <FormErrorMessage message={'invalid password'}/> }
+                { showError && <ErrorMessage message={error}/> }
 
             </form>
             

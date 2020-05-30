@@ -1,0 +1,19 @@
+.errorContainer {
+    border: 1px solid var(--error-border-color);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    color: var(--error-font-color);
+    
+    min-width: 240px;
+    max-width: 400px;
+    padding: 15px 30px;
+    margin: 15px auto;
+    box-sizing: border-box;
+
+    transition: all 0.4s ease 0s;
+}
