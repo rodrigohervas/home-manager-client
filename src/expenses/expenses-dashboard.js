@@ -68,7 +68,7 @@ function ExpensesDashBoard(props) {
      */
     const getTypeName = (id) => { 
         if(types.length > 0) {
-            return types[parseInt(id) - 1].name; //ERROR: TYPES NO SE CARGA Y FALLA!!!
+            return types[parseInt(id) - 1].name; 
         }
     };
 
